@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息浏览</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="css/InfoScan.css">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+<body>
+
+<table cellspacing="10px">
+    <tbody id="tbody">
+    <tr id="tr1"></tr>
+    <tr id="tr2"></tr>
+    <tr id="tr3"></tr>
+    <tr id="tr4"></tr>
+    <tr id="tr5"></tr>
+    </tbody>
+</table>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    $.ajax({
+        url: "/getMissPerson",
+        method: "post",
+        type: "post",
+        datatype: "json",
+        success: function (data) {
+            var result = data.data;
+            $.each(result, function (i) {
+                if (i < 5) {
+                    $("#tr1").append(
+                        "  <td>\n" +
+                        "            <div style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <div class=\"misserInfo\">\n" +
+                        "                    <p>" + result[i].personsName + "</p>\n" +
+                        "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                        "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                        "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                        "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"clear\"></div>\n" +
+                        "            </div>\n" +
+                        "        </td>"
+                    )
+                } else if (i < 10) {
+                    $("#tr2").append(
+                        "  <td>\n" +
+                        "            <div style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <div class=\"misserInfo\">\n" +
+                        "                    <p>" + result[i].personsName + "</p>\n" +
+                        "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                        "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                        "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                        "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"clear\"></div>\n" +
+                        "            </div>\n" +
+                        "        </td>"
+                    )
+                } else if (i < 15) {
+                    $("#tr3").append(
+                        "  <td>\n" +
+                        "            <div style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <div class=\"misserInfo\">\n" +
+                        "                    <p>" + result[i].personsName + "</p>\n" +
+                        "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                        "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                        "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                        "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"clear\"></div>\n" +
+                        "            </div>\n" +
+                        "        </td>"
+                    )
+                } else if (i < 20) {
+                    $("#tr4").append(
+                        "  <td>\n" +
+                        "            <div style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <div class=\"misserInfo\">\n" +
+                        "                    <p>" + result[i].personsName + "</p>\n" +
+                        "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                        "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                        "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                        "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"clear\"></div>\n" +
+                        "            </div>\n" +
+                        "        </td>"
+                    )
+                } else if (i < 25) {
+                    $("#tr5").append(
+                        "  <td>\n" +
+                        "            <div style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <div class=\"misserInfo\">\n" +
+                        "                    <p>" + result[i].personsName + "</p>\n" +
+                        "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                        "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                        "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                        "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                        "                </div>\n" +
+                        "                <div class=\"clear\"></div>\n" +
+                        "            </div>\n" +
+                        "        </td>"
+                    )
+                }
+
+            })
+
+        },
+        error: function (data) {
+
+        }
+    })
+
+
+    $(function () {
+        $("#nav_content").on("click", "div", function () {
+            var id = $(this).attr("id");
+            window.location.href = "detailMissInfo.html?id=" + id;
+        })
+    })
+
+</script>
+</body>
+
+</html>

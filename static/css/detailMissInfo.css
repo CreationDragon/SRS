@@ -1,0 +1,30 @@
+#pic {
+    float: left;
+}
+
+#info {
+    margin-left: 50px;
+    margin-top: 20px;
+    float: left;
+}
+
+#clear {
+    clear: both;
+}
+
+#detailMissPer {
+    margin-left: 20%;
+    margin-top: 20px;
+    float: left;
+}
+
+#wanning {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.smallPic {
+    width: 100px;
+    height: 100px;
+    float: left;
+}

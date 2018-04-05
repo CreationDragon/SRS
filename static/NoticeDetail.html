@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网站公告</title>
+    <link rel="stylesheet" href="css/CaseDetail.css">
+</head>
+<body>
+<div id="info">
+    <div id="title"></div>
+
+    <div id="content"></div>
+
+    <div id="date"></div>
+</div>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    var id = window.location.href.split("=")[1];
+    // 寻找成功案例
+    $.ajax({
+        type: "post",
+        method: "post",
+        url: "/getSiteNoticeById",
+        data: {"noticeId": id},
+        async: false,
+        success: function (data) {
+            var res = data.data
+            $("#title").text(res.noticeTitle);
+            $("#content").text(res.noticeContent);
+            $("#date").text(res.noticeDate)
+        }
+    });
+</script>
+
+</body>
+</html>

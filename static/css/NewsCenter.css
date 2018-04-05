@@ -1,0 +1,36 @@
+#SiteContent {
+    margin-top: 50px;
+}
+
+#SuccessfulCases {
+    /*background-color: #0cb3d0;*/
+    width: 30%;
+    height: 400px;
+    margin-left: 20px;
+    float: left;
+}
+
+#SiteNotice {
+    /*background-color: #00F7DE;*/
+    width: 30%;
+    height: 400px;
+    margin-left: 20px;
+    float: left;
+}
+
+#Anti-fraudTips {
+    /*background-color: #1E9FFF;*/
+    width: 30%;
+    height: 400px;
+    margin-left: 20px;
+    float: left;
+}
+
+#caseTitle {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#clear {
+    clear: both;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>本站新闻</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/NewsCenter.css">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="layer/layer.js"></script>
+</head>
+<body>
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img src="resources/imges/h4.jpg" alt=""></div>
+        <div><img src="resources/imges/h5.jpg" alt=""></div>
+    </div>
+</div>
+<div id="SiteContent">
+    <div id="SuccessfulCases">
+        <span><img src="resources/imges/redline.png" alt="">成功案例</span>
+        <hr class="layui-bg-gray">
+        <div id="CaseDetail"></div>
+    </div>
+
+    <div id="SiteNotice">
+        <span><img src="resources/imges/redline.png" alt="">本站公告</span>
+        <hr class="layui-bg-gray">
+        <div id="NoticeDetail"></div>
+    </div>
+
+    <div id="Anti-fraudTips">
+        <span><img src="resources/imges/redline.png" alt="">防骗技巧</span>
+        <hr class="layui-bg-gray">
+        <div id="TipsDetail"></div>
+    </div>
+    <div id="clear"></div>
+</div>
+<!-- 条目中可以是任意内容，如：<img src=""> -->
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+    // 寻找成功案例
+    $.ajax({
+        type: "post",
+        method: "post",
+        url: "/getSuccessCases",
+        async: false,
+        success: function (data) {
+            var res = data.data
+            $.each(res, function (i) {
+                $("#CaseDetail").append("&nbsp;&nbsp;<a style='color: red' class='caseTitle' href='CaseDetail.html?id=" + res[i].caseId + "'>" + res[i].caseTitle + "</a><br/><br/>");
+            })
+
+        }
+    });
+
+    //本站公告
+    $.ajax({
+        type: "post",
+        method: "post",
+        url: "/getSiteNotice",
+        async: false,
+        success: function (data) {
+            var res = data.data
+            $.each(res, function (i) {
+                $("#SiteNotice").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='NoticeDetail.html?id=" + res[i].noticeId + "'>" + res[i].noticeTitle + "</a><br/><br/>");
+            })
+
+        }
+    });
+    //防骗技巧
+    $.ajax({
+        type: "post",
+        method: "post",
+        url: "/getAntiFraudiTips",
+        async: false,
+        success: function (data) {
+            var res = data.data
+            $.each(res, function (i) {
+                $("#Anti-fraudTips").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='TipsDetail.html?id=" + res[i].tipsId + "'>" + res[i].tipsTitle + "</a><br/><br/>");
+            })
+
+        }
+    });
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            , width: '100%' //设置容器宽度
+            , arrow: 'always' //始终显示箭头
+            , anim: 'default' //切换动画方式
+        });
+    });
+</script>
+</body>
+</html>

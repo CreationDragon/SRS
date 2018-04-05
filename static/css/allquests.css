@@ -1,0 +1,18 @@
+#ques_content_one {
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+    background-color: #1b6d85;
+    text-align: center;
+    line-height: 100px;
+}
+
+#ques_content_two {
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+    background-color: #1b6d85;
+    text-align: center;
+    line-height: 100px;
+    margin-top: 50px;
+}

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/srs</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="com.gll.srs.entity.AreaCity"/>
+        <mapping resource="com/gll/srs/entity/AreaCity.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.AreaDistrict"/>
+        <mapping resource="com/gll/srs/entity/AreaDistrict.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.AreaProvince"/>
+        <mapping resource="com/gll/srs/entity/AreaProvince.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.User"/>
+        <mapping resource="com/gll/srs/entity/User.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Antifraudtips"/>
+        <mapping resource="com/gll/srs/entity/Antifraudtips.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Sitenotice"/>
+        <mapping resource="com/gll/srs/entity/Sitenotice.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Successcase"/>
+        <mapping resource="com/gll/srs/entity/Successcase.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Message"/>
+        <mapping resource="com/gll/srs/entity/Message.hbm.xml"/>
+        <mapping resource="com/gll/srs/entity/Missingpersons.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Missingpersons"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

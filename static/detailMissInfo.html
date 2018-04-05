@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详细信息</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/detailMissInfo.css">
+</head>
+<body>
+<div id="detailInfoContent">
+    <div class="layui-carousel" id="detailMissPer">
+        <div carousel-item>
+            <div class="smallPic"><img src="resources/imges/h1.jpg"></div>
+            <div class="smallPic"><img src="resources/imges/h3.jpg" alt=""></div>
+        </div>
+    </div>
+    <div id="info">
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+
+            <thead>
+            <tr>
+                <th colspan="2" style="text-align: center;background-color: #CD9B1D;height: 20px;color: #FFFFFF"> 寻亲公告
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>姓名</td>
+                <td id="name"></td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td id="gender"></td>
+            </tr>
+            <tr>
+                <td>年龄</td>
+                <td id="age"></td>
+            </tr>
+            <tr>
+                <td>身高</td>
+                <td id="bodyheight"></td>
+            </tr>
+            <tr>
+                <td>特征</td>
+                <td id="featrue"></td>
+            </tr>
+            <tr>
+                <td>家庭住址</td>
+                <td id="address"></td>
+            </tr>
+            <tr>
+                <td>是否采集DNA</td>
+                <td id="isDNA"></td>
+            </tr>
+            <tr>
+                <td>发现时衣着特征</td>
+                <td id="wear"></td>
+            </tr>
+            <tr>
+                <td>发现日期</td>
+                <td id="dateDiscover"></td>
+            </tr>
+            <tr>
+                <td>发现地点</td>
+                <td id="discoverPlace">发现地点</td>
+            </tr>
+            <tr>
+                <td>联系方式</td>
+                <td id="contact"></td>
+            </tr>
+            <tr>
+                <td>救助单位</td>
+                <td id="resurceUnit"></td>
+            </tr>
+            <tr>
+                <td>发布日期</td>
+                <td id="releaseDate"></td>
+            </tr>
+            <tr>
+                <td>备注信息</td>
+                <td id="Notes"></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div id="clear"></div>
+
+    <div id="wanning">
+        <p>*温馨提示:</p>
+        <p>1、本网站是发布寻亲公告的公益寻亲平台，寻亲公告均由各地救助管理机构主动上传，本网站对寻亲公告内容不承担法律责任。</p>
+        <p>2、鉴于公告对象因故无法提供或不能准确提供身份信息，其寻亲公告内容可能存在缺失或错误，导致组合查询结果可能出现误差，因此建议您尽可能地翻阅本网站所有寻亲公告。</p>
+        <p>3、如果您在本网站发现有所寻人员线索的，可直接与发布公告的救助管理机构联系确认。</p>
+        <p>4、本网站不向用户收取任何费用。未经书面同意，任何单位及个人不得以任何方式或理由对本网站信息进行复制、修改、传播或用于其他盈利用途。民政部保留追究法律责任的权利。</p>
+        </p>
+    </div>
+
+</div>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+    var id = window.location.href.split("=")[1];
+
+    $.ajax({
+        url: "/getMissPersonsById",
+        method: "post",
+        type: "post",
+        datatype: "json",
+        data: {"MissPersonId": id},
+        success: function (data) {
+            var res = data.data;
+            console.info(data.data);
+            $("#name").text(res.personsName);
+            $("#age").text(res.personsAge);
+            $("#gender").text(res.personsGender);
+            $("#bodyheight").text(res.personsBodyheight);
+            $("#featrue").text(res.personsFeature);
+            $("#address").text(res.personsAddress);
+            if (res.personsDna == 1) {
+                $("#isDNA").text("是");
+            } else {
+                $("#isDNA").text("否");
+            }
+            $("#wear").text(res.personsId);
+            $("#dateDiscover").text(res.personsDateDiscovered);
+            $("#discoverPlace").text(res.personsDiscoverySites);
+            $("#contact").text(res.personsContact);
+            $("#resurceUnit").text(res.personsRescueunit);
+            $("#releaseDate").text(res.personsReleasedate);
+            $("#note").text(res.personsNote);
+
+        },
+        error: function (data) {
+            layer.msg("出错")
+        }
+    })
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#detailMissPer'
+            , width: '20%' //设置容器宽度
+            , height: '300px'
+            , arrow: 'always' //始终显示箭头
+            , anim: 'default' //切换动画方式
+        });
+    });
+</script>
+</body>
+</html>
