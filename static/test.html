@@ -1,28 +1,85 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <title>layui</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <!-- æ³¨æ„ï¼šå¦‚æžœä½ ç›´æŽ¥å¤åˆ¶æ‰€æœ‰ä»£ç åˆ°æœ¬åœ°ï¼Œä¸Šè¿°cssè·¯å¾„éœ€è¦æ”¹æˆä½ æœ¬åœ°çš„ -->
-</head>
-<body>
-
-<button class="layui-btn" id="show">å±•ç¤ºæŒ‰é’®</button>
-<p hidden>å±•ç¤ºçš„å†…å®¹</p>
-
-<script src="js/jquery-3.3.1.js"></script>
-<script>
-    $("#show").trigger("click");
-
-    $(function () {
-        $("#show").click(function () {
-            $("p").removeAttr("hidden");
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>jQueryÎÄ×ÖÎÞ·ì¹ö¶¯Ð§¹û´úÂë - 16ËØ²ÄÍø</title>
+    <link type="text/css" href="css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/scroll.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.list_lh li:even').addClass('lieven');
         })
-    })
-</script>
+        $(function(){
+            $("div.list_lh").myScroll({
+                speed:40, //ÊýÖµÔ½´ó£¬ËÙ¶ÈÔ½Âý
+                rowHeight:68 //liµÄ¸ß¶È
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="box">
+    <div class="bcon">
+        <h1><b>ÁìºÅÊµÊ±²¥±¨</b></h1>
+        <!-- ´úÂë¿ªÊ¼ -->
+        <div class="list_lh">
+            <ul>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">1000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">2000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">3000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">4000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">5000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">6000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">7000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">8000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">9000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">1000000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">1100000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+                <li>
+                    <p><a href="http://www.16sucai.com/" target="_blank">1200000</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">ÁìºÅ</a><em>»ñµÃ</em></p>
+                    <p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">ÍøÓÎÕ½½­ºþ¹«²âºÀ»ªÀñ°ü</a><span>17:28:05</span></p>
+                </li>
+            </ul>
+        </div>
+        <!-- ´úÂë½áÊø -->
+    </div>
+
+</div>
+
 </body>
 </html>

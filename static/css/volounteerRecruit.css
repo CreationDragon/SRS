@@ -1,0 +1,28 @@
+#leftContent {
+    width: 30%;
+    height: 500px;
+    margin-left: 20px;
+    float: left;
+    text-align: center;
+    font-style: normal;
+}
+
+#rightContent {
+    width: 30%;
+    height: 500px;
+    margin-left: 10px;
+    margin-right: 20px;
+    float: left;
+}
+
+ol li {
+    text-align: left;
+    font-size: 20px;
+}
+
+h2 {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    font-size: 30px;
+}

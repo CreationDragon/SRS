@@ -23,8 +23,8 @@ public class Missingpersons {
     private Integer userId;
     private Integer missState;
     private String personsGender;
+    private String personsDress;
 
-    @Basic
     @Id
     @Column(name = "persons_id", nullable = true)
     public int getPersonsId() {
@@ -163,6 +163,16 @@ public class Missingpersons {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "persons_dress", nullable = true)
+    public String getPersonsDress() {
+        return personsDress;
+    }
+
+    public void setPersonsDress(String personsDress) {
+        this.personsDress = personsDress;
     }
 
     @Basic

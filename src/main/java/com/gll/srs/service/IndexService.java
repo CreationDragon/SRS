@@ -1,6 +1,7 @@
 package com.gll.srs.service;
 
 import com.gll.srs.entity.Message;
+import com.gll.srs.entity.Missingpersons;
 import com.gll.srs.model.Area;
 import com.gll.srs.model.ThreeArea;
 import com.gll.srs.model.User;
@@ -21,4 +22,8 @@ public interface IndexService {
     List<User> getAdminInfo();
 
     int putMessage(Message message, Integer userID);
+
+    List<Missingpersons> infoSearch(String keyWord);
+
+    int releaseMissInfo(Missingpersons missPersonsInfo, Integer userID);
 }

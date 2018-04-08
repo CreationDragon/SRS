@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布寻亲信息</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PersonsName" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PersonsAge" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">岁</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身高</label>
+        <div class="layui-input-inline">
+            <input type="text" name="personsBodyheight" required lay-verify="required"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">厘米</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">特征</label>
+        <div class="layui-input-inline">
+            <input type="text" name="personsFeature" required lay-verify="required" placeholder="多特征请以|分割"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">特征的描述格式如下：发色:黑色|体态：正常|头发：直发</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">家庭住址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PersonsAddress" required lay-verify="required"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否采集DNA</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="personsDna" value="0" title="是">
+            <input type="radio" name="personsDna" value="1" title="否" checked>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">衣着特征</label>
+        <div class="layui-input-inline">
+            <input type="text" name="PersonsDress" required lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式</label>
+        <div class="layui-input-inline">
+            <input type="text" name="personsContact" required lay-verify="required"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-inline">
+            <input type="radio" name="personsGender" value="男" title="男">
+            <input type="radio" name="personsGender" value="女" title="女" checked>
+        </div>
+    </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button id="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layer/layer.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script>
+    var userID = null;
+    //获取用户的基本信息
+    $.ajax({
+        type: "post",
+        method: "post",
+        url: "/getUserId",
+        async: false,
+        success: function (data) {
+            console.info("用户的ID:    " + data);
+            userID = data;
+
+            if (data !== "") {
+                //Demo
+                layui.use('form', function () {
+                    var form = layui.form;
+
+                    //监听提交
+                    form.on('submit(formDemo)', function (data) {
+                        layer.msg(JSON.stringify(data.field));
+                        $.ajax({
+                            url: "/releaseMissInfo",
+                            method: "post",
+                            type: "post",
+                            datatype: "json",
+                            data: {missPersonsInfo: JSON.stringify(data.field), "userID": userID},
+                            success: function (data) {
+                                if (data.data != 0) {
+                                    window.location.href = "index.html";
+                                }
+                            },
+                            error: function (data) {
+
+                            }
+                        })
+                        return false;
+                    });
+                });
+
+
+            } else {
+                layer.msg("未登录，无法发布信息")
+                $("#submit").attr("class", "layui-btn  layui-btn-disabled");
+            }
+
+        }
+    });
+
+
+    //头像上传
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            , url: '/upload/MissPersonPic' //上传接口
+            , data: {"userID": userID}
+            , multiple: true
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                console.log(obj.total); //得到总文件数
+                console.log(obj.successful); //请求成功的文件数
+                console.log(obj.aborted); //请求失败的文件数
+            }
+            , done: function (res, index, upload) { //每个文件提交一次触发一次。详见“请求成功的回调”
+                console.info("res:  " + res)
+                console.info("index:   " + index)
+                console.info("upload:   " + upload)
+
+            }
+        })
+    });
+</script>
+
+</body>
+</html>

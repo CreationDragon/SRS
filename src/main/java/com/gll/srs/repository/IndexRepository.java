@@ -1,6 +1,7 @@
 package com.gll.srs.repository;
 
 import com.gll.srs.entity.Message;
+import com.gll.srs.entity.Missingpersons;
 import com.gll.srs.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -15,11 +16,12 @@ public class IndexRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private List<AreaCity> areaCityList;
+    private String msg;
+    private User user;
     private List<AreaProvince> areaProvinceList;
     private List<AreaDistrict> areaDistrictList;
     private List<User> userList = new ArrayList<>();
-    private String msg;
-    private User user;
+    private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     public Area getArea(Integer count, String sign) {
         if ("province".equals(sign)) {
@@ -104,6 +106,28 @@ public class IndexRepository {
         int value = jdbcTemplate.update("INSERT INTO message(message_content, admin_id,user_id) VALUES(?,?,?) ",
                 new Object[]{
                         message.getMessageContent(), message.getAdminId(), userID
+                });
+        return value;
+    }
+
+    public List<Missingpersons> infoSearch(String keyWord) {
+        missingpersonsList = new ArrayList<>();
+        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons WHERE persons_name LIKE '%" + keyWord + "%'", new BeanPropertyRowMapper<>(Missingpersons.class));
+
+        return missingpersonsList;
+    }
+
+    public int releaseMissInfo(Missingpersons missPersonsInfo, Integer userID) {
+        int value = jdbcTemplate.update("INSERT INTO missingpersons(" +
+                        "persons_name, persons_age, persons_bodyheight, persons_feature, persons_address, persons_DNA, " +
+                        "persons_DateDiscovered, persons_DiscoverySites, persons_Contact, persons_rescueunit, persons_RELEASEDATE, " +
+                        "persons_Note, user_id, miss_state, persons_gender,persons_dress) " +
+                        "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
+                new Object[]{missPersonsInfo.getPersonsName(), missPersonsInfo.getPersonsAge(), missPersonsInfo.getPersonsBodyheight(),
+                        missPersonsInfo.getPersonsFeature(), missPersonsInfo.getPersonsAddress(), missPersonsInfo.getPersonsDna(), missPersonsInfo.getPersonsDateDiscovered(),
+                        missPersonsInfo.getPersonsDiscoverySites(), missPersonsInfo.getPersonsContact(),
+                        missPersonsInfo.getPersonsRescueunit(), missPersonsInfo.getPersonsReleasedate(), missPersonsInfo.getPersonsNote(), userID,
+                        missPersonsInfo.getMissState(), missPersonsInfo.getPersonsGender(), missPersonsInfo.getPersonsDress()
                 });
         return value;
     }

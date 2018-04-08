@@ -26,10 +26,10 @@
             <li class="layui-nav-item layui-this">
                 <a href="javascript:;" id="InfoScan">信息浏览</a>
             </li>
-            <li class="layui-nav-item" id="questionnaire_search"><a>信息搜索</a></li>
+            <li class="layui-nav-item" id="infoSearch"><a>信息搜索</a></li>
             <li class="layui-nav-item" id="message"><a>用户留言</a></li>
             <li class="layui-nav-item" id="recruit"><a>志愿者招募</a></li>
-            <li class="layui-nav-item"><a>发布寻亲信息</a></li>
+            <li class="layui-nav-item" id="releaseMissInfo"><a>发布寻亲信息</a></li>
         </ul>
     </div>
 
@@ -65,6 +65,7 @@
 
 
 <script src="js/jquery-3.3.1.js"></script>
+<script src="layer/layer.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -123,9 +124,9 @@
 
     $(function () {
         //问卷搜索
-        $("#questionnaire_search").click(function () {
+        $("#infoSearch").click(function () {
             $.ajax({
-                url: "quesSearch.html", //这里是静态页的地址
+                url: "infoSearch.html", //这里是静态页的地址
                 type: "GET", //静态页用get方法，否则服务器会抛出405错误
                 success: function (data) {
                     // var result = $(data).find("#nav_content");
@@ -166,7 +167,30 @@
                 }
             });
         });
+        //    志愿者招募
+        $("#recruit").click(function () {
+            $.ajax({
+                url: "volunteerRecruit.html", //这里是静态页的地址
+                type: "GET", //静态页用get方法，否则服务器会抛出405错误
+                success: function (data) {
+                    // var result = $(data).find("#nav_content");
+                    $("#nav_content").html(data);
 
+                }
+            });
+        })
+        //    发布寻亲信息
+        $("#releaseMissInfo").click(function () {
+            $.ajax({
+                url: "releaseMissInfo.html", //这里是静态页的地址
+                type: "GET", //静态页用get方法，否则服务器会抛出405错误
+                success: function (data) {
+                    // var result = $(data).find("#nav_content");
+                    $("#nav_content").html(data);
+
+                }
+            });
+        })
 
     });
 

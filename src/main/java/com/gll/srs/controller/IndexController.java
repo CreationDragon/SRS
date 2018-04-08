@@ -1,7 +1,9 @@
 package com.gll.srs.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gll.srs.entity.Message;
+import com.gll.srs.entity.Missingpersons;
 import com.gll.srs.model.*;
 import com.gll.srs.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,9 +28,11 @@ public class IndexController {
     private User user = new User();
     private String msg;
     private HttpSession session;
-    private JsonResult result = new JsonResult();
-    private List<User> userList = new ArrayList<>();
     private String root = null;
+    private JsonResult result = new JsonResult();
+    private Missingpersons missingpersons = new Missingpersons();
+    private List<Missingpersons> missingpersonsList = new ArrayList<>();
+    private List<User> userList = new ArrayList<>();
     private DownloadRepsoe dp = new DownloadRepsoe();
 
     @PostMapping(path = "/index")
@@ -282,5 +287,80 @@ public class IndexController {
         return id;
     }
 
+    //    关键字搜索
+    @PostMapping(path = "/infoSearch")
+    public JsonResult infoSearch(@RequestParam String keyWord) {
+        result = new JsonResult();
+        missingpersonsList = new ArrayList<>();
+        missingpersonsList = indexService.infoSearch(keyWord);
+        if (missingpersonsList.size() != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
+        result.setData(missingpersonsList);
+
+        return result;
+
+    }
+
+    //    多头像上传
+    @PostMapping(path = "/upload/MissPersonPic")
+    public DownloadRepsoe uploadMissPersonPic(MultipartFile file, @RequestParam String userID) {
+        dp = new DownloadRepsoe();
+        int count = 1;
+
+        if (null != file) {
+            String myFileName = file.getOriginalFilename();// 文件原名称
+            try {
+                root = String.valueOf(ResourceUtils.getURL("application.properties"));
+                System.out.println(root);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics";
+            File fileDir = new File(pathname);
+            if (!fileDir.exists()) { //如果不存在 则创建
+                fileDir.mkdirs();
+            }
+            String path = pathname + "/" + myFileName + ".jpg";
+            File localFile = new File(path);
+            try {
+                file.transferTo(localFile);
+                dp.setCode(0);
+                dp.setMsg("");
+                dp.setData(null);
+                return dp;
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("文件为空");
+        }
+        return dp;
+
+    }
+
+    //    信息发布
+    @PostMapping(path = "/releaseMissInfo")
+    public JsonResult releaseMissInfo(@RequestParam String missPersonsInfo, @RequestParam Integer userID) {
+        missingpersons = new Missingpersons();
+        missingpersons = JSON.parseObject(missPersonsInfo, Missingpersons.class);
+        result = new JsonResult();
+        int count = indexService.releaseMissInfo(missingpersons, userID);
+        if (count != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
+        result.setData(count);
+
+        return result;
+    }
 
 }

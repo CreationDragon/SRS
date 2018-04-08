@@ -8,7 +8,7 @@
  * @调用方法
  * $(selector).pagination(option, callback);
  * -此处callback是初始化调用，option里的callback是点击页码后调用
- * 
+ *
  * -- example --
  * $(selector).pagination({
  *     ... // 配置参数
@@ -65,7 +65,8 @@
         jumpIptCls: 'jump-ipt', //文本框内容
         jumpBtnCls: 'jump-btn', //跳转按钮
         jumpBtn: '跳转', //跳转按钮文本
-        callback: function () {} //回调
+        callback: function () {
+        } //回调
     };
 
     var Pagination = function (element, options) {
@@ -244,7 +245,8 @@
             parameter = {};
         } else {
             parameter = parameter || {};
-            callback = callback || function () {};
+            callback = callback || function () {
+            };
         }
         var options = $.extend({}, defaults, parameter);
         return this.each(function () {

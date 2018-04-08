@@ -1,6 +1,7 @@
 package com.gll.srs.service.impl;
 
 import com.gll.srs.entity.Message;
+import com.gll.srs.entity.Missingpersons;
 import com.gll.srs.model.Area;
 import com.gll.srs.model.ThreeArea;
 import com.gll.srs.model.User;
@@ -19,6 +20,7 @@ public class IndexServiceImpl implements IndexService {
     private String msg;
     private User user;
     private List<User> userList = new ArrayList<>();
+    private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     @Override
     public ThreeArea getAreaById(String provinceID, String cityID, String districtID) {
@@ -67,6 +69,19 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public int putMessage(Message message, Integer userID) {
         int count = indexRepository.putMessage(message, userID);
+        return count;
+    }
+
+    @Override
+    public List<Missingpersons> infoSearch(String keyWord) {
+        missingpersonsList = new ArrayList<>();
+        missingpersonsList = indexRepository.infoSearch(keyWord);
+        return missingpersonsList;
+    }
+
+    @Override
+    public int releaseMissInfo(Missingpersons missPersonsInfo, Integer userID) {
+        int count = indexRepository.releaseMissInfo(missPersonsInfo, userID);
         return count;
     }
 }
