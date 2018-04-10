@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gll.srs.entity.Message;
 import com.gll.srs.entity.Missingpersons;
+import com.gll.srs.entity.Volunteer;
 import com.gll.srs.model.*;
 import com.gll.srs.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,12 @@ public class IndexController {
     private HttpSession session;
     private String root = null;
     private JsonResult result = new JsonResult();
+    private DownloadRepsoe dp = new DownloadRepsoe();
+    private Volunteer volunteer = new Volunteer();
     private Missingpersons missingpersons = new Missingpersons();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
     private List<User> userList = new ArrayList<>();
-    private DownloadRepsoe dp = new DownloadRepsoe();
+    private List<Volunteer> volunteerList = new ArrayList<>();
 
     @PostMapping(path = "/index")
     public JsonResult index(HttpServletRequest request, Model model) {
@@ -308,10 +311,11 @@ public class IndexController {
     @PostMapping(path = "/upload/MissPersonPic")
     public DownloadRepsoe uploadMissPersonPic(MultipartFile file, @RequestParam String userID) {
         dp = new DownloadRepsoe();
-        int count = 1;
+
 
         if (null != file) {
             String myFileName = file.getOriginalFilename();// 文件原名称
+            indexService.putPersonsPic(myFileName, userID);
             try {
                 root = String.valueOf(ResourceUtils.getURL("application.properties"));
                 System.out.println(root);
@@ -319,12 +323,13 @@ public class IndexController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics";
+            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics/" + userID;
+//            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/resources/ImgTest/";
             File fileDir = new File(pathname);
             if (!fileDir.exists()) { //如果不存在 则创建
                 fileDir.mkdirs();
             }
-            String path = pathname + "/" + myFileName + ".jpg";
+            String path = pathname + "/" + myFileName;
             File localFile = new File(path);
             try {
                 file.transferTo(localFile);
@@ -359,6 +364,57 @@ public class IndexController {
             result.setResult("fail");
         }
         result.setData(count);
+
+        return result;
+    }
+
+    //     志愿者注册
+    @PostMapping(path = "/volunteerRegister")
+    public JsonResult volunteerRegister(@RequestParam String volunteerInfo) {
+        result = new JsonResult();
+        Volunteer volunteer = JSON.parseObject(volunteerInfo, Volunteer.class);
+        int value = indexService.volunteerRegister(volunteer);
+        return result;
+    }
+
+    //    获取志愿者信息
+    @PostMapping(path = "/getVolunteer")
+    public JsonResult getVolunteer() {
+        result = new JsonResult();
+        volunteerList = indexService.getVolunteer();
+        if (volunteerList.size() != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
+        result.setData(volunteerList);
+
+        return result;
+    }
+
+    //    获取志愿者的详细信息
+    @PostMapping(path = "/getVolunteerInfo")
+    public JsonResult getVolunteerInfo(@RequestParam Integer volunteerId) {
+        result = new JsonResult();
+        volunteer = indexService.getVolunteerInfo(volunteerId);
+
+        result.setResult("Success");
+        result.setData(volunteer);
+
+        return result;
+    }
+
+    //    获取头像
+    @PostMapping(path = "/getPersonPic")
+    public JsonResult getPersonPic(@RequestParam Integer MissPersonId) {
+        result = new JsonResult();
+        List<String> pics = indexService.getPersonPics(MissPersonId);
+        if (pics.size() != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
+        result.setData(pics);
 
         return result;
     }

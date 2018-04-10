@@ -9,6 +9,11 @@
     float: left;
 }
 
+#delete {
+    float: left;
+    margin-left: 20px;
+}
+
 #reply {
     float: left;
     margin-left: 20px;

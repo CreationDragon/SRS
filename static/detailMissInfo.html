@@ -8,11 +8,19 @@
 </head>
 <body>
 <div id="detailInfoContent">
-    <div class="layui-carousel" id="detailMissPer">
-        <div carousel-item>
-            <div class="smallPic"><img src="resources/imges/h1.jpg"></div>
-            <div class="smallPic"><img src="resources/imges/h3.jpg" alt=""></div>
+    <div id="left_content">
+        <div class="layui-carousel" id="detailMissPer">
+            <div carousel-item id="personsPic">
+
+            </div>
         </div>
+
+        <div id="uploadPic">
+            <button type="button" class="layui-btn" id="test1">
+                <i class="layui-icon">&#xe67c;</i>更新图片
+            </button>
+        </div>
+
     </div>
     <div id="info">
         <table class="layui-table">
@@ -110,6 +118,26 @@
     var id = window.location.href.split("=")[1];
 
     $.ajax({
+        url: "/getPersonPic",
+        method: "post",
+        type: "post",
+        datatype: "json",
+        data: {"MissPersonId": id},
+        success: function (data) {
+            var res = data.data;
+            $.each(res, function (i) {
+                $("#personsPic").append("<div class='smallPic'><img src='/missPersonsPics/" + id + "/" + res[i] + "'></div>")
+                ///missPersonsPics/1/index.jpg
+                // $("#personsPic").append("<div class='smallPic'><img src='/missPersonsPics/1/index.jpg'></div>")
+            })
+
+        },
+        error: function (data) {
+            layer.msg("出错")
+        }
+    });
+
+    $.ajax({
         url: "/getMissPersonsById",
         method: "post",
         type: "post",
@@ -152,6 +180,29 @@
             , arrow: 'always' //始终显示箭头
             , anim: 'default' //切换动画方式
         });
+    });
+    //头像上传
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            , url: '/upload/MissPersonPic' //上传接口
+            , data: {"userID": id}
+            , multiple: true
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                console.log(obj.total); //得到总文件数
+                console.log(obj.successful); //请求成功的文件数
+                console.log(obj.aborted); //请求失败的文件数
+            }
+            , done: function (res, index, upload) { //每个文件提交一次触发一次。详见“请求成功的回调”
+                console.info("res:  " + res)
+                console.info("index:   " + index)
+                console.info("upload:   " + upload)
+
+            }
+        })
     });
 </script>
 </body>

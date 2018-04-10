@@ -1,9 +1,9 @@
 package com.gll.srs.service.impl;
 
 import com.gll.srs.entity.Antifraudtips;
+import com.gll.srs.entity.News;
 import com.gll.srs.entity.Sitenotice;
 import com.gll.srs.entity.Successcase;
-import com.gll.srs.model.JsonResult;
 import com.gll.srs.repository.NewsRepository;
 import com.gll.srs.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,52 +16,50 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsRepository newsRepository;
-    private Successcase successcase = new Successcase();
-    private Sitenotice sitenotice = new Sitenotice();
-    private Antifraudtips antifraudtips = new Antifraudtips();
-    private List<Successcase> successcaseList = new ArrayList<>();
+    private News news = new News();
+    private List<News> newsList = new ArrayList<>();
     private List<Sitenotice> sitenoticeList = new ArrayList<>();
     private List<Antifraudtips> antifraudtipsList = new ArrayList<>();
 
     @Override
-    public List<Successcase> getSuccessCases() {
-        successcaseList = newsRepository.getSuccessCases();
-        return successcaseList;
+    public List<News> getSuccessCases(Integer type) {
+        newsList = newsRepository.getSuccessCases(type);
+        return newsList;
     }
 
     @Override
-    public Successcase getSuccessCasesById(Integer caseId) {
-        successcase = new Successcase();
-        successcase = newsRepository.getSuccessCasesById(caseId);
+    public News getSuccessCasesById(Integer caseId) {
+        news = new News();
+        news = newsRepository.getSuccessCasesById(caseId);
 
-        return successcase;
+        return news;
     }
 
     @Override
-    public List<Sitenotice> getSiteNotice() {
-        sitenoticeList = newsRepository.getSiteNotice();
-        return sitenoticeList;
+    public List<News> getSiteNotice(Integer type) {
+        newsList = newsRepository.getSiteNotice(type);
+        return newsList;
     }
 
     @Override
-    public Sitenotice getSiteNoticeById(Integer noticeId) {
-        sitenotice = new Sitenotice();
-        sitenotice = newsRepository.getSiteNoticeById(noticeId);
+    public News getSiteNoticeById(Integer noticeId) {
+        news = new News();
+        news = newsRepository.getSiteNoticeById(noticeId);
 
-        return sitenotice;
+        return news;
     }
 
     @Override
-    public List<Antifraudtips> getAntiFraudiTips() {
-        antifraudtipsList = newsRepository.getAntiFraudiTips();
-        return antifraudtipsList;
+    public List<News> getAntiFraudiTips(Integer type) {
+        newsList = newsRepository.getAntiFraudiTips(type);
+        return newsList;
     }
 
     @Override
-    public Antifraudtips getAntiFraudTipsById(Integer tipsId) {
-        antifraudtips = new Antifraudtips();
-        antifraudtips = newsRepository.getAntiFraudTipsById(tipsId);
+    public News getAntiFraudTipsById(Integer tipsId) {
+        news = new News();
+        news = newsRepository.getAntiFraudTipsById(tipsId);
 
-        return antifraudtips;
+        return news;
     }
 }

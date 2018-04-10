@@ -1,6 +1,7 @@
 package com.gll.srs.controller;
 
 import com.gll.srs.entity.Antifraudtips;
+import com.gll.srs.entity.News;
 import com.gll.srs.entity.Sitenotice;
 import com.gll.srs.entity.Successcase;
 import com.gll.srs.model.JsonResult;
@@ -18,23 +19,21 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
     private JsonResult result;
-    private Successcase successcase = new Successcase();
-    private Sitenotice sitenotice = new Sitenotice();
-    private Antifraudtips antifraudtips = new Antifraudtips();
-    private List<Successcase> successcaseList = new ArrayList<>();
+    private News news = new News();
+    private List<News> newsList = new ArrayList<>();
     private List<Sitenotice> sitenoticeList = new ArrayList<>();
     private List<Antifraudtips> antifraudtipsList = new ArrayList<>();
 
     @PostMapping(path = "/getSuccessCases")
-    public JsonResult getSuccessCases() {
+    public JsonResult getSuccessCases(@RequestParam Integer type) {
         result = new JsonResult();
-        successcaseList = newsService.getSuccessCases();
-        if (successcaseList.size() != 0) {
+        newsList = newsService.getSuccessCases(type);
+        if (newsList.size() != 0) {
             result.setResult("success");
-            result.setData(successcaseList);
         } else {
             result.setResult("fail");
         }
+        result.setData(newsList);
 
         return result;
     }
@@ -42,57 +41,57 @@ public class NewsController {
     @PostMapping(path = "/getSuccessCasesById")
     public JsonResult getSuccessCasesById(@RequestParam Integer caseId) {
         result = new JsonResult();
-        successcase = new Successcase();
-        successcase = newsService.getSuccessCasesById(caseId);
+        news = new News();
+        news = newsService.getSuccessCasesById(caseId);
 
         result.setResult("success");
-        result.setData(successcase);
+        result.setData(news);
 
         return result;
     }
 
     @PostMapping(path = "/getSiteNotice")
-    public JsonResult getSiteNotice() {
+    public JsonResult getSiteNotice(@RequestParam Integer type) {
         result = new JsonResult();
-        sitenoticeList = newsService.getSiteNotice();
-        if (sitenoticeList.size() != 0) {
+        newsList = newsService.getSiteNotice(type);
+        if (newsList.size() != 0) {
             result.setResult("success");
-            result.setData(sitenoticeList);
         } else {
             result.setResult("fail");
         }
+        result.setData(newsList);
         return result;
     }
 
     @PostMapping(path = "/getSiteNoticeById")
     public JsonResult getSiteNoticeById(@RequestParam Integer noticeId) {
         result = new JsonResult();
-        sitenotice = newsService.getSiteNoticeById(noticeId);
+        news = newsService.getSiteNoticeById(noticeId);
         result.setResult("success");
-        result.setData(sitenotice);
+        result.setData(news);
         return result;
     }
 
     @PostMapping(path = "/getAntiFraudiTips")
-    public JsonResult getAntiFraudiTips() {
+    public JsonResult getAntiFraudiTips(@RequestParam Integer type) {
         result = new JsonResult();
-        antifraudtipsList = newsService.getAntiFraudiTips();
+        newsList = newsService.getAntiFraudiTips(type);
         if (antifraudtipsList.size() != 0) {
             result.setResult("success");
-            result.setData(antifraudtipsList);
         } else {
             result.setResult("fail");
         }
+        result.setData(newsList);
         return result;
     }
 
     @PostMapping(path = "/getAntiFraudTipsById")
     public JsonResult getAntiFraudTipsById(@RequestParam Integer tipsId) {
         result = new JsonResult();
-        antifraudtips = newsService.getAntiFraudTipsById(tipsId);
+        news = newsService.getAntiFraudTipsById(tipsId);
 
         result.setResult("success");
-        result.setData(antifraudtips);
+        result.setData(news);
 
         return result;
     }

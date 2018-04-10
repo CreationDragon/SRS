@@ -26,8 +26,9 @@
     <div id="nav_left">
         <ul class="layui-nav layui-bg-green">
             <li class="layui-nav-item layui-this" id="user_manage"><a>用户管理</a></li>
-            <li class="layui-nav-item" id="questional_manage"><a>问卷管理</a></li>
+            <li class="layui-nav-item" id="MissInfo_manage"><a>信息管理</a></li>
             <li class="layui-nav-item" id="message_reply"><a>留言回复</a></li>
+            <li class="layui-nav-item" id="news_manager"><a>新闻管理</a></li>
         </ul>
     </div>
 
@@ -123,31 +124,31 @@
     });
 
     //事件的委托，使用ajax加载html界面时，使用委托才能调用html中的组件。
-    //问卷编辑
-    $("#nav_content").on("click", "#ques_edit", function () {
+    //失踪人物编辑
+    $("#nav_content").on("click", "#missInfo_edit", function () {
         var id = $(this).parents("td").prevAll().siblings(":first").text();
         var bro = $(this).parents("td").prevAll().siblings();
         console.info("你选取的ID是:    " + id);
-        window.location.href = encodeURI("editQues.html?quesID=" + id);
+        window.location.href = encodeURI("editMissInfo.html?quesID=" + id);
     });
 
 
-    //问卷删除
-    $("#nav_content").on("click", "#ques_del", function () {
+    //失踪信息删除
+    $("#nav_content").on("click", "#missInfo_del", function () {
         var id = $(this).parents("td").prevAll().siblings(":first").text();
         console.info("你选取的ID是:    " + id)
 
         $.ajax({
             type: "post",
             method: "post",
-            url: "/admin/deleteQues",
-            data: {"quesID": id},
+            url: "/admin/deleteMissInfo",
+            data: {"MissInfoId": id},
             async: false,
             success: function (data) {
                 console.info("删除的结果:    " + data.result)
                 if (data.result == "success") {
                     $.ajax({
-                        url: "questionalmanage.html", //这里是静态页的地址
+                        url: "MissInfoManager.html", //这里是静态页的地址
                         type: "GET", //静态页用get方法，否则服务器会抛出405错误
                         success: function (data) {
                             // var result = $(data).find("#nav_content");
@@ -163,6 +164,66 @@
 
     });
 
+
+    //新闻编辑
+    $("#nav_content").on("click", "#news_edit", function () {
+        var id = $(this).parents("td").prevAll().siblings(":first").text();
+        var bro = $(this).parents("td").prevAll().siblings();
+        console.info("你选取的ID是:    " + id);
+        // window.location.href = encodeURI("editNews.html?NewsID=" + id);
+        layer.open({
+            type: 2,
+            title: '新闻编辑',
+            shadeClose: true,
+            closeBtn: 1,
+            shade: 0.8,
+            area: ['50%', '50%'],
+            btn: ['确认', '取消'],
+            content: 'editNews.html?NewsId=' + id,//iframe的url
+            yes: function () {
+                layer.closeAll()
+            },
+            no: function () {
+
+            }
+        });
+    });
+
+
+    //新闻删除
+    $("#nav_content").on("click", "#news_del", function () {
+        var id = $(this).parents("td").prevAll().siblings(":first").text();
+        console.info("你选取的ID是:    " + id)
+
+        $.ajax({
+            type: "post",
+            method: "post",
+            url: "/admin/deleteNews",
+            data: {"NewsId": id},
+            async: false,
+            success: function (data) {
+                console.info("删除的结果:    " + data.result)
+                if (data.result == "success") {
+                    layer.msg("删除成功");
+                    setTimeout(function () {
+                        $.ajax({
+                            url: "NewsManager.html", //这里是静态页的地址
+                            type: "GET", //静态页用get方法，否则服务器会抛出405错误
+                            success: function (data) {
+                                // var result = $(data).find("#nav_content");
+                                $("#nav_content").html(data);
+
+                            }
+                        });
+                    }, 1000)
+                } else {
+                    layer.msg("删除失败")
+                }
+            }
+        });
+
+
+    });
 
     var user_data;
     $.ajax({
@@ -263,10 +324,10 @@
             }
         });
 
-        $('#questional_manage').click(function () {
+        $('#MissInfo_manage').click(function () {
 
             $.ajax({
-                url: "questionalmanage.html", //这里是静态页的地址
+                url: "MissInfoManager.html", //这里是静态页的地址
                 type: "GET", //静态页用get方法，否则服务器会抛出405错误
                 success: function (data) {
                     // var result = $(data).find("#nav_content");
@@ -281,6 +342,20 @@
 
             $.ajax({
                 url: "messageReply.html", //这里是静态页的地址
+                type: "GET", //静态页用get方法，否则服务器会抛出405错误
+                success: function (data) {
+                    // var result = $(data).find("#nav_content");
+                    $("#nav_content").html(data);
+
+                }
+            });
+
+        });
+
+        $('#news_manager').click(function () {
+
+            $.ajax({
+                url: "NewsManager.html", //这里是静态页的地址
                 type: "GET", //静态页用get方法，否则服务器会抛出405错误
                 success: function (data) {
                     // var result = $(data).find("#nav_content");

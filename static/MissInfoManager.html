@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>人员管理界面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+<body>
+
+<table class="layui-hide" id="test"></table>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+
+    $(".layui-form layui-border-box layui-table-view").css("height", "500px")
+
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#test'
+            // , height: 315
+            , height: 600
+            , url: '/admin/getMissPersonsInfo' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'personsId', title: '人物ID', width: 86, sort: true, fixed: 'left'}
+                , {field: 'personsName', title: '姓名', width: 142}
+                , {field: 'personsAge', title: '年龄', width: 110}
+                , {field: 'personsGender', title: '性别', width: 80, sort: true}
+                , {field: 'personsFeature', title: '特征', width: 246}
+                , {field: 'personsAddress', title: '家庭住址', width: 146, sort: true}
+                , {field: 'personsReleasedate', title: '发布日期', width: 160, sort: true}
+                , {field: 'option', title: '操作', width: 162, sort: true}
+            ]]
+        });
+    });
+
+</script>
+</body>
+</html>

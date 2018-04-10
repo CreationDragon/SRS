@@ -24,9 +24,11 @@ public class Missingpersons {
     private Integer missState;
     private String personsGender;
     private String personsDress;
+    private String psersonsPic;
+    private Integer state;
 
     @Id
-    @Column(name = "persons_id", nullable = true)
+    @Column(name = "persons_id", nullable = false)
     public int getPersonsId() {
         return personsId;
     }
@@ -166,7 +168,7 @@ public class Missingpersons {
     }
 
     @Basic
-    @Column(name = "persons_dress", nullable = true)
+    @Column(name = "persons_dress", nullable = true, length = 255)
     public String getPersonsDress() {
         return personsDress;
     }
@@ -247,5 +249,25 @@ public class Missingpersons {
 
     public void setPersonsGender(String personsGender) {
         this.personsGender = personsGender;
+    }
+
+    @Basic
+    @Column(name = "psersons_pic", nullable = true, length = 255)
+    public String getPsersonsPic() {
+        return psersonsPic;
+    }
+
+    public void setPsersonsPic(String psersonsPic) {
+        this.psersonsPic = psersonsPic;
+    }
+
+    @Basic
+    @Column(name = "state", nullable = true)
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

@@ -1,21 +1,22 @@
 package com.gll.srs.service;
 
 import com.gll.srs.entity.Antifraudtips;
+import com.gll.srs.entity.News;
 import com.gll.srs.entity.Sitenotice;
 import com.gll.srs.entity.Successcase;
 
 import java.util.List;
 
 public interface NewsService {
-    List<Successcase> getSuccessCases();
+    List<News> getSuccessCases(Integer type);
 
-    Successcase getSuccessCasesById(Integer caseId);
+    News getSuccessCasesById(Integer caseId);
 
-    List<Sitenotice> getSiteNotice();
+    List<News> getSiteNotice(Integer type);
 
-    Sitenotice getSiteNoticeById(Integer noticeId);
+    News getSiteNoticeById(Integer noticeId);
 
-    List<Antifraudtips> getAntiFraudiTips();
+    List<News> getAntiFraudiTips(Integer type);
 
-    Antifraudtips getAntiFraudTipsById(Integer tipsId);
+    News getAntiFraudTipsById(Integer tipsId);
 }

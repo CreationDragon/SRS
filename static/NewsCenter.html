@@ -50,11 +50,12 @@
         type: "post",
         method: "post",
         url: "/getSuccessCases",
+        data: {"type": 0},
         async: false,
         success: function (data) {
             var res = data.data
             $.each(res, function (i) {
-                $("#CaseDetail").append("&nbsp;&nbsp;<a style='color: red' class='caseTitle' href='CaseDetail.html?id=" + res[i].caseId + "'>" + res[i].caseTitle + "</a><br/><br/>");
+                $("#CaseDetail").append("&nbsp;&nbsp;<a style='color: red' class='caseTitle' href='CaseDetail.html?id=" + res[i].newsId + "'>" + res[i].newsTitle + "</a><br/><br/>");
             })
 
         }
@@ -65,11 +66,12 @@
         type: "post",
         method: "post",
         url: "/getSiteNotice",
+        data: {"type": 1},
         async: false,
         success: function (data) {
             var res = data.data
             $.each(res, function (i) {
-                $("#SiteNotice").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='NoticeDetail.html?id=" + res[i].noticeId + "'>" + res[i].noticeTitle + "</a><br/><br/>");
+                $("#SiteNotice").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='NoticeDetail.html?id=" + res[i].newsId + "'>" + res[i].newsTitle + "</a><br/><br/>");
             })
 
         }
@@ -79,11 +81,12 @@
         type: "post",
         method: "post",
         url: "/getAntiFraudiTips",
+        data: {"type": 2},
         async: false,
         success: function (data) {
             var res = data.data
             $.each(res, function (i) {
-                $("#Anti-fraudTips").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='TipsDetail.html?id=" + res[i].tipsId + "'>" + res[i].tipsTitle + "</a><br/><br/>");
+                $("#Anti-fraudTips").append("&nbsp;&nbsp;<a style='color: red' class='noticeTitle' href='TipsDetail.html?id=" + res[i].newsId + "'>" + res[i].newsTitle + "</a><br/><br/>");
             })
 
         }

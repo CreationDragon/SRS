@@ -24,6 +24,12 @@
         <mapping resource="com/gll/srs/entity/Message.hbm.xml"/>
         <mapping resource="com/gll/srs/entity/Missingpersons.hbm.xml"/>
         <mapping class="com.gll.srs.entity.Missingpersons"/>
+        <mapping resource="com/gll/srs/entity/Volunteer.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.Volunteer"/>
+        <mapping class="com.gll.srs.entity.Personspic"/>
+        <mapping resource="com/gll/srs/entity/Personspic.hbm.xml"/>
+        <mapping class="com.gll.srs.entity.News"/>
+        <mapping resource="com/gll/srs/entity/News.hbm.xml"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

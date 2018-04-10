@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新闻管理</title>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+<body>
+
+<table id="demo" lay-filter="test"></table>
+<div id="function">
+    <button class="layui-btn">
+        <i class="layui-icon">&#xe608;</i> 添加
+    </button>
+</div>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        // $("#layui-table-cell laytable-cell-1-option").append("<div class=\"layui-btn-group\"><button class=\"layui-btn\">编辑</button><button class=\"layui-btn\">删除</button></div>")
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 600
+            , url: '/admin/getNews' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'newsId', title: '新闻ID', width: 85, sort: true, fixed: 'left'}
+                , {field: 'newsTitle', title: '新闻标题', width: 380}
+                , {field: 'newsContent', title: '新闻内容', width: 296, sort: true}
+                , {field: 'newsDate', title: '新闻发布时间', width: 144}
+                , {field: 'type', title: '新闻类型', width: 90}
+                , {field: 'option', title: '操作', width: 148, sort: true}
+            ]]
+        });
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.gll.srs.entity.Volunteer" table="volunteer" schema="srs">
+        <id name="volunteerId">
+            <column name="volunteer_id" sql-type="int(11)"/>
+        </id>
+        <property name="volunteerName">
+            <column name="volunteer_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerAge">
+            <column name="volunteer_age" sql-type="int(255)" not-null="true"/>
+        </property>
+        <property name="volunteerGender">
+            <column name="volunteer_gender" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerAddress">
+            <column name="volunteer_address" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerEmail">
+            <column name="volunteer_email" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerPhone">
+            <column name="volunteer_phone" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerRegisterDate">
+            <column name="volunteer_register_date" sql-type="datetime" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

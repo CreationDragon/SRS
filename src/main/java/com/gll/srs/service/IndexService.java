@@ -2,6 +2,7 @@ package com.gll.srs.service;
 
 import com.gll.srs.entity.Message;
 import com.gll.srs.entity.Missingpersons;
+import com.gll.srs.entity.Volunteer;
 import com.gll.srs.model.Area;
 import com.gll.srs.model.ThreeArea;
 import com.gll.srs.model.User;
@@ -26,4 +27,14 @@ public interface IndexService {
     List<Missingpersons> infoSearch(String keyWord);
 
     int releaseMissInfo(Missingpersons missPersonsInfo, Integer userID);
+
+    int volunteerRegister(Volunteer volunteer);
+
+    List<Volunteer> getVolunteer();
+
+    Volunteer getVolunteerInfo(Integer volunteerId);
+
+    void putPersonsPic(String myFileName, String userID);
+
+    List<String> getPersonPics(Integer id);
 }

@@ -51,6 +51,7 @@
                             "        <input type=\"text\" name=\"message\" autocomplete=\"off\"\n" +
                             "               class=\"layui-input layui-disabled\"disabled id=\"keyword\" value=" + result[i].messageContent + ">\n" +
                             "        <div id=\"reply\"  class='reply'><button class=\"layui-btn\" value=" + result[i].messageId + " id=" + result[i].userId + ">回复</button></div>\n" +
+                            "        <div id=\"delete\"  class='delete'><button class=\"layui-btn\" value=" + result[i].messageId + " id=" + result[i].userId + ">删除</button></div>\n" +
                             "        <div id=\"clear\"></div>\n" +
                             "\n" +
                             "        <div id=\"content\">\n" +
@@ -66,6 +67,30 @@
                             console.info("messageID:  " + messageID)
                             //    回复
                             window.location.href = "reply.html?userID=" + userID + "?messageID=" + messageID + "?adminID=" + adminID
+                        })
+                    })
+
+                    $(function () {
+                        $(".delete").click(function () {
+                            // var messageID = $(this).children(":first").attr("id");
+                            messageID = $(this).children(":first").attr("value");
+                            $.ajax({
+                                type: "post",
+                                method: "post",
+                                url: "/admin/deleteMessage",
+                                data: {"messageID": messageID},
+                                async: false,
+                                success: function (data) {
+                                    if (data.data != 0) {
+                                        layer.msg("删除成功");
+                                    } else {
+                                        layer.msg("遇到了一点问题")
+                                    }
+                                },
+                                error: function (data) {
+
+                                }
+                            });
                         })
                     })
 

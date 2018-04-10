@@ -2,6 +2,7 @@ package com.gll.srs.repository;
 
 import com.gll.srs.entity.Message;
 import com.gll.srs.entity.Missingpersons;
+import com.gll.srs.entity.Volunteer;
 import com.gll.srs.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -18,9 +19,12 @@ public class IndexRepository {
     private List<AreaCity> areaCityList;
     private String msg;
     private User user;
+    private Volunteer volunteer;
     private List<AreaProvince> areaProvinceList;
     private List<AreaDistrict> areaDistrictList;
     private List<User> userList = new ArrayList<>();
+    private List<String> picNames = new ArrayList<>();
+    private List<Volunteer> volunteerList = new ArrayList<>();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     public Area getArea(Integer count, String sign) {
@@ -130,5 +134,46 @@ public class IndexRepository {
                         missPersonsInfo.getMissState(), missPersonsInfo.getPersonsGender(), missPersonsInfo.getPersonsDress()
                 });
         return value;
+    }
+
+    public int volunteerRegister(Volunteer volunteer, String time) {
+        int value = jdbcTemplate.update("INSERT INTO volunteer(volunteer_name,volunteer_age,volunteer_gender,volunteer_address,volunteer_email,volunteer_phone,volunteer_register_date) VALUES(?,?,?,?,?,?,?)",
+                new Object[]{volunteer.getVolunteerName(), volunteer.getVolunteerAge(), volunteer.getVolunteerGender(), volunteer.getVolunteerAddress(), volunteer.getVolunteerEmail(), volunteer.getVolunteerPhone(), time});
+        return value;
+    }
+
+    public List<Volunteer> getVolunteer() {
+        volunteerList = jdbcTemplate.query("SELECT * FROM volunteer", new BeanPropertyRowMapper<>(Volunteer.class));
+        return volunteerList;
+    }
+
+    public Volunteer getVolunteerInfo(Integer volunteerId) {
+        volunteer = new Volunteer();
+
+        volunteer = jdbcTemplate.queryForObject("SELECT * FROM volunteer WHERE volunteer_id = '" + volunteerId + "'", new BeanPropertyRowMapper<>(Volunteer.class));
+
+        return volunteer;
+    }
+
+    public void putPersonsPic(String myFileName, Integer userid) {
+        List<String> picNameList = jdbcTemplate.queryForList("SELECT pic_name FROM `personspic` WHERE persons_id=" + userid, String.class);
+        if (picNameList.size() != 0) {
+            for (String picName : picNameList
+                    ) {
+                if (picName == myFileName) {
+                    System.out.println("已经有这张图片了");
+                } else {
+                    jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
+                }
+            }
+        } else {
+            jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
+        }
+    }
+
+    public List<String> getPersonPics(Integer id) {
+        picNames = new ArrayList<>();
+        picNames = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + id, String.class);
+        return picNames;
     }
 }

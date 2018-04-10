@@ -2,6 +2,7 @@ package com.gll.srs.service.impl;
 
 import com.gll.srs.entity.Message;
 import com.gll.srs.entity.Missingpersons;
+import com.gll.srs.entity.Volunteer;
 import com.gll.srs.model.Area;
 import com.gll.srs.model.ThreeArea;
 import com.gll.srs.model.User;
@@ -10,7 +11,9 @@ import com.gll.srs.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,8 +22,10 @@ public class IndexServiceImpl implements IndexService {
     private IndexRepository indexRepository;
     private String msg;
     private User user;
+    private Volunteer volunteer;
     private List<User> userList = new ArrayList<>();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
+    private List<Volunteer> volunteerList = new ArrayList<>();
 
     @Override
     public ThreeArea getAreaById(String provinceID, String cityID, String districtID) {
@@ -83,5 +88,44 @@ public class IndexServiceImpl implements IndexService {
     public int releaseMissInfo(Missingpersons missPersonsInfo, Integer userID) {
         int count = indexRepository.releaseMissInfo(missPersonsInfo, userID);
         return count;
+    }
+
+    @Override
+    public int volunteerRegister(Volunteer volunteer) {
+
+        Date date = new Date();
+
+        SimpleDateFormat sf = new SimpleDateFormat();
+        String time = sf.format(date);
+
+        int value = indexRepository.volunteerRegister(volunteer, time);
+
+
+        return value;
+    }
+
+    @Override
+    public List<Volunteer> getVolunteer() {
+        volunteerList = indexRepository.getVolunteer();
+        return volunteerList;
+    }
+
+    @Override
+    public Volunteer getVolunteerInfo(Integer volunteerId) {
+        volunteer = new Volunteer();
+        volunteer = indexRepository.getVolunteerInfo(volunteerId);
+        return volunteer;
+    }
+
+    @Override
+    public void putPersonsPic(String myFileName, String userID) {
+        Integer userid = Integer.parseInt(userID);
+        indexRepository.putPersonsPic(myFileName, userid);
+    }
+
+    @Override
+    public List<String> getPersonPics(Integer id) {
+        List<String> pics = indexRepository.getPersonPics(id);
+        return pics;
     }
 }

@@ -28,3 +28,9 @@
     height: 100px;
     float: left;
 }
+
+#uploadPic {
+    float: left;
+    margin-top: 18%;
+    margin-left: -15%;
+}

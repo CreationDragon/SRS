@@ -30,11 +30,13 @@
         success: function (data) {
             var result = data.data;
             $.each(result, function (i) {
+
+
                 if (i < 5) {
                     $("#tr1").append(
                         "  <td>\n" +
                         "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                        "                <img src=\"resources/imges/1.png\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                        "                <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                         "                <div class=\"misserInfo\">\n" +
                         "                    <p>" + result[i].personsName + "</p>\n" +
                         "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
@@ -111,9 +113,11 @@
                         "        </td>"
                     )
                 }
+                if (result[i].psersonsPic == null) {
+                    $("." + result[i].personsId).attr("src", "resources/imges/1.png");
+                }
 
             })
-
         },
         error: function (data) {
 

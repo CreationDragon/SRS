@@ -39,6 +39,12 @@ public class MissPersonRepository {
                 missingpersons.setPersonsRescueunit(resultSet.getString("persons_rescueunit"));
                 missingpersons.setPersonsGender(resultSet.getString("persons_gender"));
                 missingpersons.setPersonsFeature(resultSet.getString("persons_feature"));
+                List<String> picName = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + resultSet.getInt("persons_id"), String.class);
+                if (picName.size() != 0) {
+                    missingpersons.setPsersonsPic(picName.get(0));
+                } else {
+                    missingpersons.setPsersonsPic(null);
+                }
                 return missingpersons;
             }
         });
