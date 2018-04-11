@@ -21,6 +21,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     private JsonResult result = new JsonResult();
+    private News news = new News();
     private List<News> newsList = new ArrayList<>();
     private List<com.gll.srs.model.News> newss = new ArrayList<>();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
@@ -126,6 +127,35 @@ public class AdminController {
         News news = new News();
         news = adminService.getNewsById(NewsId);
         result.setData(news);
+
+        return result;
+    }
+
+    @PostMapping(path = "/admin/UpdateNewsById")
+    public JsonResult UpdateNewsById(@RequestParam Integer NewsId, @RequestParam String News) {
+        result = new JsonResult();
+        com.gll.srs.entity.News news = new News();
+        news = JSON.parseObject(News, News.class);
+        Integer value = adminService.UpdateNewsById(news, NewsId);
+
+        if (value != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
+        result.setData(value);
+
+        return result;
+    }
+
+    @PostMapping(path = "/admin/AddNews")
+    public JsonResult AddNews(@RequestParam String News) {
+        result = new JsonResult();
+
+        news = JSON.parseObject(News, com.gll.srs.entity.News.class);
+
+
+        Integer value = adminService.addNews(news);
 
         return result;
     }

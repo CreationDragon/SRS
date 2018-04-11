@@ -47,7 +47,7 @@ public class NewsRepository {
     }
 
     public News getAntiFraudTipsById(Integer tipsId) {
-        news = jdbcTemplate.queryForObject("SELECT * FROM news WHERE tips_id=" + tipsId + " AND news_type=2", new BeanPropertyRowMapper<>(News.class));
+        news = jdbcTemplate.queryForObject("SELECT * FROM news WHERE news_id=" + tipsId + " AND news_type=2", new BeanPropertyRowMapper<>(News.class));
         return news;
     }
 }

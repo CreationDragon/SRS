@@ -7,7 +7,9 @@ import com.gll.srs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -111,5 +113,20 @@ public class AdminServiceImpl implements AdminService {
         News news = new News();
         news = adminRepository.getNewsById(newsId);
         return news;
+    }
+
+    @Override
+    public Integer UpdateNewsById(News news, Integer newsId) {
+        Integer value = adminRepository.UpdateNewsById(news, newsId);
+        return value;
+    }
+
+    @Override
+    public Integer addNews(News news) {
+        Date time = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat();
+        String date = sf.format(time);
+        Integer value = adminRepository.addNews(news,date);
+        return value;
     }
 }

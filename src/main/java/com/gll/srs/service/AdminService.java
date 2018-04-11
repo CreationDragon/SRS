@@ -21,4 +21,8 @@ public interface AdminService {
     Integer deleteNews(Integer newsId);
 
     News getNewsById(Integer newsId);
+
+    Integer UpdateNewsById(News news, Integer newsId);
+
+    Integer addNews(News news);
 }

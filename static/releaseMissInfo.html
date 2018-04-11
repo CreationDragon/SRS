@@ -2,94 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>发布寻亲信息</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>添加新闻</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/releaseMissInfo.css">
+    <style>
+
+        body {
+            /*background-color: #2D2D2D*/
+            background-color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
-<form class="layui-form" action="">
-    <div class="layui-form-item">
-        <label class="layui-form-label">姓名</label>
-        <div class="layui-input-inline">
-            <input type="text" name="PersonsName" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
+<div id="mydiv" style="height:500px;">
+
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PersonsName" required lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">年龄</label>
-        <div class="layui-input-inline">
-            <input type="text" name="PersonsAge" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PersonsAge" required lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">岁</div>
         </div>
-        <div class="layui-form-mid layui-word-aux">岁</div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">身高</label>
-        <div class="layui-input-inline">
-            <input type="text" name="personsBodyheight" required lay-verify="required"
-                   autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">身高</label>
+            <div class="layui-input-inline">
+                <input type="text" name="personsBodyheight" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">厘米</div>
         </div>
-        <div class="layui-form-mid layui-word-aux">厘米</div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">特征</label>
-        <div class="layui-input-inline">
-            <input type="text" name="personsFeature" required lay-verify="required" placeholder="多特征请以|分割"
-                   autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">特征</label>
+            <div class="layui-input-inline">
+                <input type="text" name="personsFeature" required lay-verify="required" placeholder="多特征请以|分割"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">特征的描述格式如下：发色:黑色|体态：正常|头发：直发</div>
         </div>
-        <div class="layui-form-mid layui-word-aux">特征的描述格式如下：发色:黑色|体态：正常|头发：直发</div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">家庭住址</label>
-        <div class="layui-input-inline">
-            <input type="text" name="PersonsAddress" required lay-verify="required"
-                   autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">家庭住址</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PersonsAddress" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">是否采集DNA</label>
-        <div class="layui-input-inline">
-            <input type="radio" name="personsDna" value="0" title="是">
-            <input type="radio" name="personsDna" value="1" title="否" checked>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否采集DNA</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="personsDna" value="0" title="是">
+                <input type="radio" name="personsDna" value="1" title="否" checked>
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">衣着特征</label>
-        <div class="layui-input-inline">
-            <input type="text" name="PersonsDress" required lay-verify="required" autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">衣着特征</label>
+            <div class="layui-input-inline">
+                <input type="text" name="PersonsDress" required lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">联系方式</label>
-        <div class="layui-input-inline">
-            <input type="text" name="personsContact" required lay-verify="required"
-                   autocomplete="off"
-                   class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系方式</label>
+            <div class="layui-input-inline">
+                <input type="text" name="personsContact" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">性别</label>
-        <div class="layui-input-inline">
-            <input type="radio" name="personsGender" value="男" title="男">
-            <input type="radio" name="personsGender" value="女" title="女" checked>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="personsGender" value="男" title="男">
+                <input type="radio" name="personsGender" value="女" title="女" checked>
+            </div>
         </div>
-    </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-inline">
-            <button id="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <div class="layui-form-item" id="two_btn">
+            <div class="layui-input-inline">
+                <button id="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+
+</div>
 
 <script src="js/jquery-3.3.1.js"></script>
 <script src="layer/layer.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="CanvasParticles/canvas-particle.js"></script>
 <script>
+    var sign = window.location.href.split("=")[1]
+    //    背景效果
+    window.onload = function () {
+        //配置
+        var config = {
+            vx: 4,	//小球x轴速度,正为右，负为左
+            vy: 4,	//小球y轴速度
+            height: 2,	//小球高宽，其实为正方形，所以不宜太大
+            width: 2,
+            count: 200,		//点个数
+            color: "121, 162, 185", 	//点颜色
+            stroke: "130,255,255", 		//线条颜色
+            dist: 6000, 	//点吸附距离
+            e_dist: 20000, 	//鼠标吸附加速距离
+            max_conn: 10 	//点到点最大连接数
+        }
+
+        //调用
+        CanvasParticle(config);
+    }
+
     var userID = null;
     //获取用户的基本信息
     $.ajax({
@@ -117,7 +153,11 @@
                             data: {missPersonsInfo: JSON.stringify(data.field), "userID": userID},
                             success: function (data) {
                                 if (data.data != 0) {
-                                    window.location.href = "index.html";
+                                    if (sign == "releaseMissInfo") {
+                                        window.location.href = "index.html";
+                                    } else {
+                                        window.location.href = "administrator.html";
+                                    }
                                 }
                             },
                             error: function (data) {

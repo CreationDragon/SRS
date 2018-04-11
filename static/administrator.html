@@ -181,11 +181,23 @@
             btn: ['确认', '取消'],
             content: 'editNews.html?NewsId=' + id,//iframe的url
             yes: function () {
+
+                // window.parent.location.reload();
+                $.ajax({
+                    url: "NewsManager.html", //这里是静态页的地址
+                    type: "GET", //静态页用get方法，否则服务器会抛出405错误
+                    success: function (data) {
+                        // var result = $(data).find("#nav_content");
+                        $("#nav_content").html(data);
+
+                    }
+                });
+
                 layer.closeAll()
             },
             no: function () {
 
-            }
+            },
         });
     });
 
@@ -221,7 +233,6 @@
                 }
             }
         });
-
 
     });
 

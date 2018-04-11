@@ -65,4 +65,17 @@ public class AdminRepository {
 
         return news;
     }
+
+    public Integer UpdateNewsById(News news, Integer newsId) {
+
+        Integer value = jdbcTemplate.update("UPDATE news SET news_title = ?,news_content=?,news_date=?,news_type=? WHERE news_id=?",
+                new Object[]{news.getNewsTitle(), news.getNewsContent(), news.getNewsDate(), news.getNewsType(), newsId});
+
+        return value;
+    }
+
+    public Integer addNews(News news, String date) {
+        Integer value = jdbcTemplate.update("INSERT INTO news(news_title, news_content, news_date,news_type)VALUE (?,?,?,?)", new Object[]{news.getNewsTitle(), news.getNewsContent(), date, news.getNewsType()});
+        return value;
+    }
 }
