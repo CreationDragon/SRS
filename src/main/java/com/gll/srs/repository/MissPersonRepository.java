@@ -55,4 +55,10 @@ public class MissPersonRepository {
         missingpersons = jdbcTemplate.queryForObject("SELECT * FROM missingpersons WHERE persons_id=" + missPersonId, new BeanPropertyRowMapper<>(Missingpersons.class));
         return missingpersons;
     }
+
+    public String getMissPersonsPic(Integer missPersonId) {
+        String picName = jdbcTemplate.queryForObject("SELECT pic_name FROM personspic WHERE persons_id=" + missPersonId, String.class);
+
+        return picName;
+    }
 }

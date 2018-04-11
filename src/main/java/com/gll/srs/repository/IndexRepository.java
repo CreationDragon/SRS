@@ -176,4 +176,9 @@ public class IndexRepository {
         picNames = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + id, String.class);
         return picNames;
     }
+
+    public List<String> getMissPersonsPicById(int personsId) {
+        List<String> picNames = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + personsId, String.class);
+        return picNames;
+    }
 }

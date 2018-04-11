@@ -81,6 +81,13 @@ public class IndexServiceImpl implements IndexService {
     public List<Missingpersons> infoSearch(String keyWord) {
         missingpersonsList = new ArrayList<>();
         missingpersonsList = indexRepository.infoSearch(keyWord);
+        for (Missingpersons mps : missingpersonsList
+                ) {
+            List<String> picNames = indexRepository.getMissPersonsPicById(mps.getPersonsId());
+            if (picNames.size() != 0) {
+                mps.setPsersonsPic(picNames.get(0));
+            }
+        }
         return missingpersonsList;
     }
 
