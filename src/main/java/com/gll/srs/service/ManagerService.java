@@ -7,7 +7,7 @@ import com.gll.srs.model.User;
 import java.util.List;
 
 public interface ManagerService {
-    List<User> getUser();
+    List<User> getUser(Integer page, Integer limit);
 
     Integer deleteUser(String userID);
 
@@ -26,4 +26,7 @@ public interface ManagerService {
     List<Message> getMessageById(String adminID, String messageID);
 
     boolean replyUser(Integer messageID, String userEmail, String replyContent, String adminEmail, String userName);
+
+    int getUserCount();
+
 }

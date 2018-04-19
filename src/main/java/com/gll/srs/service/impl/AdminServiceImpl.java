@@ -22,9 +22,9 @@ public class AdminServiceImpl implements AdminService {
     private List<com.gll.srs.entity.Missingpersons> missingpersons = new ArrayList<>();
 
     @Override
-    public List<Missingpersons> getMissPersonsInfo() {
+    public List<Missingpersons> getMissPersonsInfo(Integer page, Integer limit) {
         missingpersonsList = new ArrayList<>();
-        missingpersons = adminRepository.getMissPersonsInfo();
+        missingpersons = adminRepository.getMissPersonsInfo(page,limit);
         for (com.gll.srs.entity.Missingpersons missPerson : missingpersons
                 ) {
             Missingpersons missingpersons = new Missingpersons();
@@ -76,9 +76,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<com.gll.srs.model.News> getNews() {
+    public List<com.gll.srs.model.News> getNews(Integer page, Integer limit) {
         newss = new ArrayList<>();
-        newsList = adminRepository.getNews();
+        newsList = adminRepository.getNews(page,limit);
         for (News news : newsList
                 ) {
             com.gll.srs.model.News news1 = new com.gll.srs.model.News();
@@ -128,5 +128,17 @@ public class AdminServiceImpl implements AdminService {
         String date = sf.format(time);
         Integer value = adminRepository.addNews(news,date);
         return value;
+    }
+
+    @Override
+    public int getMissPersonsInfoCount() {
+        int count = adminRepository.getMissPersonsInfoCount();
+        return count;
+    }
+
+    @Override
+    public int getNewsCount() {
+        int count = adminRepository.getNewsCount();
+        return count;
     }
 }

@@ -22,9 +22,10 @@ public class ManagerServiceImpl implements ManagerService {
     private ManagerRepository managerRepository;
 
     @Override
-    public List<com.gll.srs.model.User> getUser() {
-        users = managerRepository.getUser();
+    public List<com.gll.srs.model.User> getUser(Integer page, Integer limit) {
+        users = managerRepository.getUser(page, limit);
         userList = new ArrayList<>();
+        Integer count = null;
 
         for (User u : users
                 ) {
@@ -126,6 +127,12 @@ public class ManagerServiceImpl implements ManagerService {
         }
 
         return flag;
+    }
+
+    @Override
+    public int getUserCount() {
+        int count = managerRepository.getUserCount();
+        return count;
     }
 
 

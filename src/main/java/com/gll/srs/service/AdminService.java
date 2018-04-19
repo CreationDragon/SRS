@@ -6,7 +6,7 @@ import com.gll.srs.model.Missingpersons;
 import java.util.List;
 
 public interface AdminService {
-    List<Missingpersons> getMissPersonsInfo();
+    List<Missingpersons> getMissPersonsInfo(Integer page, Integer limit);
 
     Integer deleteMissInfo(Integer missInfoId);
 
@@ -16,7 +16,7 @@ public interface AdminService {
 
     Integer deleteMessage(Integer messageID);
 
-    List<com.gll.srs.model.News> getNews();
+    List<com.gll.srs.model.News> getNews(Integer page, Integer limit);
 
     Integer deleteNews(Integer newsId);
 
@@ -25,4 +25,8 @@ public interface AdminService {
     Integer UpdateNewsById(News news, Integer newsId);
 
     Integer addNews(News news);
+
+    int getMissPersonsInfoCount();
+
+    int getNewsCount();
 }

@@ -17,8 +17,9 @@ public class AdminRepository {
     List<News> newsList = new ArrayList<>();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
-    public List<Missingpersons> getMissPersonsInfo() {
-        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons WHERE state = 0", new BeanPropertyRowMapper<>(Missingpersons.class));
+    public List<Missingpersons> getMissPersonsInfo(Integer page, Integer limit) {
+        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons WHERE state = 0 LIMIT ?,?",
+                new Object[]{(page - 1) * limit, limit}, new BeanPropertyRowMapper<>(Missingpersons.class));
         return missingpersonsList;
     }
 
@@ -47,9 +48,10 @@ public class AdminRepository {
         return value;
     }
 
-    public List<News> getNews() {
+    public List<News> getNews(Integer page, Integer limit) {
         newsList = new ArrayList<>();
-        newsList = jdbcTemplate.query("SELECT * FROM news WHERE news_state = 0", new BeanPropertyRowMapper<>(News.class));
+        newsList = jdbcTemplate.query("SELECT * FROM news WHERE news_state = 0 LIMIT ?,?",
+                new Object[]{(page - 1) * limit, limit}, new BeanPropertyRowMapper<>(News.class));
         return newsList;
     }
 
@@ -77,5 +79,15 @@ public class AdminRepository {
     public Integer addNews(News news, String date) {
         Integer value = jdbcTemplate.update("INSERT INTO news(news_title, news_content, news_date,news_type)VALUE (?,?,?,?)", new Object[]{news.getNewsTitle(), news.getNewsContent(), date, news.getNewsType()});
         return value;
+    }
+
+    public int getMissPersonsInfoCount() {
+        int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM missingpersons WHERE state = 0", Integer.class);
+        return count;
+    }
+
+    public int getNewsCount() {
+        int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM news WHERE news_state=0", Integer.class);
+        return 0;
     }
 }

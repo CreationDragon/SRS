@@ -21,24 +21,25 @@ public class ManagerRepository {
     private JdbcTemplate jdbcTemplate;
     private List<Message> messageList = new ArrayList<>();
 
-    public List<User> getUser() {
-        users = jdbcTemplate.query("SELECT * FROM USER WHERE user_state=0", new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet resultSet, int i) throws SQLException {
-                User user = new User();
-                user.setUserId(resultSet.getInt("user_id"));
-                user.setUserName(resultSet.getString("user_name"));
-                user.setUserGener(resultSet.getString("user_gener"));
-                user.setUserPhone(resultSet.getString("user_phone"));
-                user.setUserAuthority(resultSet.getInt("user_authority"));
-                user.setUserAddressDetail(resultSet.getString("user_address_detail"));
-                user.setUserProvince(resultSet.getInt("user_province"));
-                user.setUserCity(resultSet.getInt("user_city"));
-                user.setUserDistrict(resultSet.getInt("user_district"));
-                user.setUserEmail(resultSet.getString("user_email"));
-                return user;
-            }
-        });
+    public List<User> getUser(Integer page, Integer limit) {
+        users = jdbcTemplate.query("SELECT * FROM USER WHERE user_state=0 LIMIT ?,?",
+                new Object[]{(page - 1) * limit, limit}, new RowMapper<User>() {
+                    @Override
+                    public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                        User user = new User();
+                        user.setUserId(resultSet.getInt("user_id"));
+                        user.setUserName(resultSet.getString("user_name"));
+                        user.setUserGener(resultSet.getString("user_gener"));
+                        user.setUserPhone(resultSet.getString("user_phone"));
+                        user.setUserAuthority(resultSet.getInt("user_authority"));
+                        user.setUserAddressDetail(resultSet.getString("user_address_detail"));
+                        user.setUserProvince(resultSet.getInt("user_province"));
+                        user.setUserCity(resultSet.getInt("user_city"));
+                        user.setUserDistrict(resultSet.getInt("user_district"));
+                        user.setUserEmail(resultSet.getString("user_email"));
+                        return user;
+                    }
+                });
         return users;
     }
 
@@ -186,5 +187,10 @@ public class ManagerRepository {
                 new Object[]{1, s, messageID});
 
         return value;
+    }
+
+    public int getUserCount() {
+        int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM USER WHERE user_state=0", Integer.class);
+        return count;
     }
 }

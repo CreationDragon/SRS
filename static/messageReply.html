@@ -49,7 +49,7 @@
                     $.each(result, function (i) {
                         $("#reply_content").append(" <div class=\"layui-form-item\" id=\"contain\">\n" +
                             "        <input type=\"text\" name=\"message\" autocomplete=\"off\"\n" +
-                            "               class=\"layui-input layui-disabled\"disabled id=\"keyword\" value=" + result[i].messageContent + ">\n" +
+                            "               class=\"layui-input\" readonly id=\"keyword\" value=" + result[i].messageContent + ">\n" +
                             "        <div id=\"reply\"  class='reply'><button class=\"layui-btn\" value=" + result[i].messageId + " id=" + result[i].userId + ">回复</button></div>\n" +
                             "        <div id=\"delete\"  class='delete'><button class=\"layui-btn\" value=" + result[i].messageId + " id=" + result[i].userId + ">删除</button></div>\n" +
                             "        <div id=\"clear\"></div>\n" +

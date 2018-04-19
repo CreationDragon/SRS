@@ -30,12 +30,12 @@ public class ManagerController {
 
 
     @GetMapping(path = "/admin/getUser")
-    public String getuser() {
+    public String getuser(@RequestParam Integer page, @RequestParam Integer limit) {
         result = new JsonResult();
-        users = managerService.getUser();
+        users = managerService.getUser(page, limit);
         tableInfo.setCode(0);
         tableInfo.setMsg("");
-        tableInfo.setCount(users.size());
+        tableInfo.setCount(managerService.getUserCount());
         tableInfo.setData(users);
 
         String userinfo = JSON.toJSONString(tableInfo);

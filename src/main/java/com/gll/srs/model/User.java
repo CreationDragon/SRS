@@ -24,6 +24,7 @@ public class User {
     private String city;
     private String district;
     private String option;
+    private Integer count;
 
     public String getOption() {
         return option;
@@ -159,6 +160,14 @@ public class User {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     @Override

@@ -27,11 +27,11 @@ public class AdminController {
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     @GetMapping(path = "/admin/getMissPersonsInfo")
-    public String getMissPersonsInfo() {
+    public String getMissPersonsInfo(@RequestParam Integer page, @RequestParam Integer limit) {
         MissTableInfo missTableInfo = new MissTableInfo();
-        missingpersonsList = adminService.getMissPersonsInfo();
+        missingpersonsList = adminService.getMissPersonsInfo(page,limit);
         missTableInfo.setCode(0);
-        missTableInfo.setCount(missingpersonsList.size());
+        missTableInfo.setCount(adminService.getMissPersonsInfoCount());
         missTableInfo.setData(missingpersonsList);
         missTableInfo.setMsg("");
 
@@ -92,13 +92,13 @@ public class AdminController {
     }
 
     @GetMapping(path = "/admin/getNews")
-    public String getNews() {
+    public String getNews(@RequestParam Integer page, @RequestParam Integer limit) {
 
         NewsTableInfo newsTableInfo = new NewsTableInfo();
         newss = new ArrayList<>();
-        newss = adminService.getNews();
+        newss = adminService.getNews(page,limit);
         newsTableInfo.setCode(0);
-        newsTableInfo.setCount(newss.size());
+        newsTableInfo.setCount(adminService.getNewsCount());
         newsTableInfo.setData(newss);
         newsTableInfo.setMsg("");
 

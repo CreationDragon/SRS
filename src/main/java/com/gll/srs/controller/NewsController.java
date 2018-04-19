@@ -26,6 +26,7 @@ public class NewsController {
 
     @PostMapping(path = "/getSuccessCases")
     public JsonResult getSuccessCases(@RequestParam Integer type) {
+        System.out.println("type:   " + type);
         result = new JsonResult();
         newsList = newsService.getSuccessCases(type);
         if (newsList.size() != 0) {
