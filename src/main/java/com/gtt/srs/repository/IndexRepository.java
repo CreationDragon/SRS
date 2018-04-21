@@ -1,9 +1,12 @@
 package com.gtt.srs.repository;
 
+import com.gtt.srs.entity.AreaCity;
+import com.gtt.srs.entity.AreaDistrict;
+import com.gtt.srs.entity.AreaProvince;
 import com.gtt.srs.entity.Message;
 import com.gtt.srs.entity.Missingpersons;
 import com.gtt.srs.entity.Volunteer;
-import com.gll.srs.model.*;
+import com.gtt.srs.model.*;
 import com.gtt.srs.entity.*;
 import com.gtt.srs.model.Area;
 import com.gtt.srs.model.ThreeArea;

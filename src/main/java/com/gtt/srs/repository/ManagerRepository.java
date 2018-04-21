@@ -1,6 +1,6 @@
 package com.gtt.srs.repository;
 
-import com.gll.srs.entity.*;
+import com.gtt.srs.entity.*;
 import com.gtt.srs.model.Message;
 import com.gtt.srs.model.ThreeArea;
 import com.gtt.srs.entity.AreaCity;
