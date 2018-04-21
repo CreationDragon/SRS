@@ -135,4 +135,9 @@ public class IndexServiceImpl implements IndexService {
         List<String> pics = indexRepository.getPersonPics(id);
         return pics;
     }
+
+    @Override
+    public void updatePic(String myFileName, Integer integer) {
+        indexRepository.updatePic(myFileName,integer);
+    }
 }

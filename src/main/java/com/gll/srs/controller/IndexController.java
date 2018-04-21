@@ -238,10 +238,11 @@ public class IndexController {
 
     @PostMapping(path = "/upload/head")
     public DownloadRepsoe upload(MultipartFile file, @RequestParam String userID) {
+        String myFileName = null;
         dp = new DownloadRepsoe();
 
         if (null != file) {
-            String myFileName = file.getOriginalFilename();// 文件原名称
+            myFileName = file.getOriginalFilename();// 文件原名称
             try {
                 root = String.valueOf(ResourceUtils.getURL("application.properties"));
                 System.out.println(root);
@@ -261,6 +262,7 @@ public class IndexController {
                 dp.setCode(0);
                 dp.setMsg("");
                 dp.setData(null);
+                indexService.updatePic(myFileName, Integer.valueOf(userID));
                 return dp;
             } catch (IllegalStateException e) {
                 e.printStackTrace();
@@ -406,9 +408,10 @@ public class IndexController {
 
     //    获取头像
     @PostMapping(path = "/getPersonPic")
-    public JsonResult getPersonPic(@RequestParam Integer MissPersonId) {
+    public JsonResult getPersonPic(@RequestParam String MissPersonId) {
         result = new JsonResult();
-        List<String> pics = indexService.getPersonPics(MissPersonId);
+        Integer missPersonId = Integer.parseInt(MissPersonId);
+        List<String> pics = indexService.getPersonPics(missPersonId);
         if (pics.size() != 0) {
             result.setResult("success");
         } else {

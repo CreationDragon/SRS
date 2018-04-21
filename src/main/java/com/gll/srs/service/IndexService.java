@@ -37,4 +37,7 @@ public interface IndexService {
     void putPersonsPic(String myFileName, String userID);
 
     List<String> getPersonPics(Integer id);
+
+    void updatePic(String myFileName, Integer integer);
+
 }

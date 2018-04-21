@@ -181,4 +181,9 @@ public class IndexRepository {
         List<String> picNames = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + personsId, String.class);
         return picNames;
     }
+
+    public void updatePic(String myFileName, Integer userId) {
+        jdbcTemplate.update("UPDATE missingpersons SET psersons_pic=? WHERE user_id=?",
+                new Object[]{myFileName, userId});
+    }
 }
