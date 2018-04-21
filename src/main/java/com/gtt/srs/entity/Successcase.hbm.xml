@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.gtt.srs.entity.Successcase" table="successcase" schema="srs">
+        <id name="caseId">
+            <column name="case_id" sql-type="int(11)"/>
+        </id>
+        <property name="caseTitle">
+            <column name="case_title" sql-type="varchar(200)" length="200" not-null="true"/>
+        </property>
+        <property name="caseContent">
+            <column name="case_content" sql-type="varchar(200)" length="200" not-null="true"/>
+        </property>
+        <property name="caseDate">
+            <column name="case_date" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
