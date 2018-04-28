@@ -19,8 +19,8 @@ public class MissPersonRepository {
     private Missingpersons missingpersons = new Missingpersons();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
-    public List<Missingpersons> getMissPerson() {
-        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons", new RowMapper<Missingpersons>() {
+    public List<Missingpersons> getMissPerson(Integer page, Integer limit) {
+        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons limit ?,?", new Object[]{(page - 1) * limit, limit}, new RowMapper<Missingpersons>() {
             @Override
             public Missingpersons mapRow(ResultSet resultSet, int i) throws SQLException {
                 missingpersons = new Missingpersons();
@@ -60,5 +60,10 @@ public class MissPersonRepository {
         String picName = jdbcTemplate.queryForObject("SELECT pic_name FROM personspic WHERE persons_id=" + missPersonId, String.class);
 
         return picName;
+    }
+
+    public Integer getMissPersonsCount() {
+        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM missingpersons", Integer.class);
+        return count;
     }
 }

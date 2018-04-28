@@ -17,9 +17,9 @@ public class MissPersonServiceImpl implements MissPersonService {
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     @Override
-    public List<Missingpersons> getMissPerson() {
+    public List<Missingpersons> getMissPerson(Integer page, Integer limit) {
 
-        missingpersonsList = missPersonRepository.getMissPerson();
+        missingpersonsList = missPersonRepository.getMissPerson(page,limit);
         return missingpersonsList;
     }
 
@@ -27,5 +27,11 @@ public class MissPersonServiceImpl implements MissPersonService {
     public Missingpersons getMissPersonsById(Integer missPersonId) {
         missingpersons = missPersonRepository.getMissPersonsById(missPersonId);
         return missingpersons;
+    }
+
+    @Override
+    public Integer getMissPersonsCount() {
+        Integer count = missPersonRepository.getMissPersonsCount();
+        return count;
     }
 }

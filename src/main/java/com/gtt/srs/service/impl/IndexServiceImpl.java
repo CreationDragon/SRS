@@ -125,9 +125,8 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public void putPersonsPic(String myFileName, String userID) {
-        Integer userid = Integer.parseInt(userID);
-        indexRepository.putPersonsPic(myFileName, userid);
+    public void putPersonsPic(String myFileName, Integer useriD) {
+        indexRepository.putPersonsPic(myFileName, useriD);
     }
 
     @Override
@@ -138,6 +137,12 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public void updatePic(String myFileName, Integer integer) {
-        indexRepository.updatePic(myFileName,integer);
+        indexRepository.updatePic(myFileName, integer);
+    }
+
+    @Override
+    public int getPersonsCount() {
+        int count = indexRepository.getPersonsCount();
+        return count + 1;
     }
 }

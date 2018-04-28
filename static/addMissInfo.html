@@ -44,18 +44,6 @@
             </div>
             <div class="layui-form-mid layui-word-aux">厘米</div>
         </div>
-
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">上传图片</label>
-            <div class="layui-input-inline">
-                <button type="button" class="layui-btn" id="test1">
-                    <i class="layui-icon">&#xe67c;</i>上传图片
-                </button>
-            </div>
-        </div>
-
-
         <div class="layui-form-item">
             <label class="layui-form-label">特征</label>
             <div class="layui-input-inline">
@@ -156,7 +144,6 @@
 
                     //监听提交
                     form.on('submit(formDemo)', function (data) {
-                        // layer.msg(JSON.stringify(data.field));
                         $.ajax({
                             url: "/releaseMissInfo",
                             method: "post",
@@ -165,13 +152,7 @@
                             data: {missPersonsInfo: JSON.stringify(data.field), "userID": userID},
                             success: function (data) {
                                 if (data.data != 0) {
-                                    if (sign == "releaseMissInfo") {
-                                        layer.msg("发布成功")
-                                        // window.location.href = "index.html";
-                                    } else {
-                                        layer.msg("发布成功")
-                                        // window.location.href = "administrator.html";
-                                    }
+                                    layer.msg("添加成功");
                                 }
                             },
                             error: function (data) {
@@ -191,30 +172,6 @@
         }
     });
 
-
-    //头像上传
-    layui.use('upload', function () {
-        var upload = layui.upload;
-
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            , url: '/image/MissPersonPic' //上传接口
-            , data: {"userID": userID}
-            , multiple: true
-            , allDone: function (obj) { //当文件全部被提交后，才触发
-                console.log(obj.total); //得到总文件数
-                console.log(obj.successful); //请求成功的文件数
-                console.log(obj.aborted); //请求失败的文件数
-            }
-            , done: function (res, index, upload) { //每个文件提交一次触发一次。详见“请求成功的回调”
-                console.info("res:  " + res)
-                console.info("index:   " + index)
-                console.info("upload:   " + upload)
-
-            }
-        })
-    });
 </script>
 
 </body>

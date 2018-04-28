@@ -34,10 +34,12 @@ public interface IndexService {
 
     Volunteer getVolunteerInfo(Integer volunteerId);
 
-    void putPersonsPic(String myFileName, String userID);
+    void putPersonsPic(String myFileName, Integer useriD);
 
     List<String> getPersonPics(Integer id);
 
     void updatePic(String myFileName, Integer integer);
+
+    int getPersonsCount();
 
 }

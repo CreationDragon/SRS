@@ -20,12 +20,11 @@ public class MissPersonController {
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
 
     @PostMapping(path = "/getMissPerson")
-    public JsonResult getMissPerson() {
+    public JsonResult getMissPerson(@RequestParam Integer page, @RequestParam Integer limit) {
         result = new JsonResult();
-        missingpersonsList = missPersonService.getMissPerson();
+        missingpersonsList = missPersonService.getMissPerson(page, limit);
         result.setResult("success");
         result.setData(missingpersonsList);
-
         return result;
     }
 
@@ -35,6 +34,15 @@ public class MissPersonController {
         missingpersons = missPersonService.getMissPersonsById(MissPersonId);
         result.setResult("success");
         result.setData(missingpersons);
+
+        return result;
+    }
+
+    @PostMapping(path = "/getMissPersonsCount")
+    public JsonResult getMissPersonsCount() {
+        JsonResult result = new JsonResult();
+        Integer count = missPersonService.getMissPersonsCount();
+        result.setData(count);
 
         return result;
     }

@@ -6,7 +6,7 @@ public class NewsTableInfo {
     private Integer code;
     private String msg;
     private int count;
-    private List<com.gtt.srs.model.News> data;
+    private List<News> data;
 
     public Integer getCode() {
         return code;

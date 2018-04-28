@@ -15,3 +15,10 @@ img {
 .clear {
     clear: both;
 }
+
+#page {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    text-align: center;
+}

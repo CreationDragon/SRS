@@ -88,6 +88,6 @@ public class AdminRepository {
 
     public int getNewsCount() {
         int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM news WHERE news_state=0", Integer.class);
-        return 0;
+        return count;
     }
 }

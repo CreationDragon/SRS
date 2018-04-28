@@ -39,17 +39,17 @@
     <div class="layui-form-item">
         <label class="layui-form-label">住址</label>
         <div class="layui-input-inline">
-            <select name="province" id="province" lay-filter="province">
+            <select name="province" id="province" lay-filter="province" autocomplete="off">
                 <option value="" selected="" class="province">请选择省</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="city" id="city" lay-filter="city">
+            <select name="city" id="city" lay-filter="city" autocomplete="off">
                 <option value="" selected="" class="city">请选择市</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="district" id="district">
+            <select name="district" id="district" autocomplete="off">
                 <option value="" selected="" class="district">请选择县/区</option>
             </select>
         </div>
@@ -103,6 +103,10 @@
     var province;
     var city;
     var district;
+    var provinceId = null;
+    var cityId = null;
+    var districtId = null;
+
     var data = decodeURI(window.location.href).split("?")[1].split("=");
     var userID = data[1];
     console.info("data是:    " + data)
@@ -129,9 +133,9 @@
             $("#phone").val(result.userPhone).attr('selected', true);
             $("#email").val(result.userEmail).attr('selected', true);
             $("#address_detail").val(result.userAddressDetail);
-            $("#province").append("<option value='" + province + "'>" + province + "</option>").val(province);
-            $("#city").append("<option value='" + city + "'>" + city + "</option>").val(city);
-            $("#district").append("<option value='" + district + "'>" + district + "</option>").val(district);
+            // $("#province").append("<option value='" + province + "'>" + province + "</option>").val(province);
+            $("#city").append("<option selected='selected' value='" + cityId + "'>" + city + "</option>");
+            $("#district").append("<option selected='selected' value='" + districtId + "'>" + district + "</option>");
             if (data.data.userGener == "男") {
                 $("input[value='男']").attr('checked', 'true');
             } else {
@@ -196,16 +200,17 @@
         data: {"id": "", "sign": "province"},
         async: false,//是否异步请求
         success: function (data) {   //如何发送成功
-            var province = data.data.provinceList;
-            $.each(province, function (id, name) {
-                if (name.provinceName != province) {
-                    select_province.append("<option value=" + name.provinceId + ">" + name.provinceName + "</option>;");
+            var provinceList = data.data.provinceList;
+            $.each(provinceList, function (id, name) {
+                if (province != provinceList[id].provinceName) {
+                    select_province.append("<option class='" + name.provinceId + "' value=" + name.provinceId + ">" + name.provinceName + "</option>;");
+                } else {
+                    select_province.append("<option selected='selected' value=" + name.provinceId + ">" + name.provinceName + "</option>;");
                 }
             })
         }
-    })
-    ;
-    //找市
+    });
+    // //找市
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
@@ -224,9 +229,13 @@
                 data: {"id": city_id, "sign": "city"},
                 async: false,//是否异步请求
                 success: function (citys) {   //如何发送成功
-                    var city = citys.data.cityList;
-                    $.each(city, function (id, name) {
-                        select_city.append("<option value=" + name.cityId + ">" + name.cityName + "</option>;");
+                    var cityList = citys.data.cityList;
+                    $.each(cityList, function (id, name) {
+                        if (city != cityList[id].provinceName) {
+                            select_city.append("<option class='" + name.cityId + "' value=" + name.cityId + ">" + name.cityName + "</option>;");
+                        } else {
+                            select_city.append("<option selected='selected' value=" + name.cityId + ">" + name.cityName + "</option>;");
+                        }
                         form.render('select');
                     })
                 }
@@ -250,9 +259,13 @@
                 data: {"id": district_id, "sign": "district"},
                 async: false,//是否异步请求
                 success: function (districts) {   //如何发送成功
-                    var district = districts.data.districtList;
-                    $.each(district, function (id, name) {
-                        select_district.append("<option value=" + name.districtId + ">" + name.districtName + "</option>;");
+                    var districtList = districts.data.districtList;
+                    $.each(districtList, function (id, name) {
+                        if (district != districtList[id].provinceName) {
+                            select_district.append("<option class='" + name.districtId + "' value=" + name.districtId + ">" + name.districtName + "</option>;");
+                        } else {
+                            select_district.append("<option selected='selected' value=" + name.districtId + ">" + name.districtName + "</option>;");
+                        }
                         form.render('select');
                     })
                 }
@@ -263,7 +276,6 @@
             select_district.remove();
             form.render();
         })
-
 
         //自定义验证规则
         form.verify({

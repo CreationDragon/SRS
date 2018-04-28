@@ -170,9 +170,10 @@ public class IndexRepository {
                 if (picName == myFileName) {
                     System.out.println("已经有这张图片了");
                 } else {
-                    jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
+                    break;
                 }
             }
+            jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
         } else {
             jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
         }
@@ -192,5 +193,10 @@ public class IndexRepository {
     public void updatePic(String myFileName, Integer userId) {
         jdbcTemplate.update("UPDATE missingpersons SET psersons_pic=? WHERE user_id=?",
                 new Object[]{myFileName, userId});
+    }
+
+    public int getPersonsCount() {
+        int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM missingpersons", Integer.class);
+        return count;
     }
 }

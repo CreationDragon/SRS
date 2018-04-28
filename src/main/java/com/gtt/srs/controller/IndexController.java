@@ -309,9 +309,53 @@ public class IndexController {
 
     //    多头像上传
     @PostMapping(path = "/upload/MissPersonPic")
-    public DownloadRepsoe uploadMissPersonPic(MultipartFile file, @RequestParam String userID) {
+    public DownloadRepsoe uploadMissPersonPic(MultipartFile file, @RequestParam Integer userID) {
         dp = new DownloadRepsoe();
 
+        if (null != file) {
+            String myFileName = file.getOriginalFilename();// 文件原名称
+            indexService.putPersonsPic(myFileName, userID);
+            try {
+                root = String.valueOf(ResourceUtils.getURL("application.properties"));
+                System.out.println(root);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics/" + userID;
+//            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/resources/ImgTest/";
+            File fileDir = new File(pathname);
+            if (!fileDir.exists()) { //如果不存在 则创建
+                fileDir.mkdirs();
+            }
+            String path = pathname + "/" + myFileName;
+            File localFile = new File(path);
+            try {
+                file.transferTo(localFile);
+                dp.setCode(0);
+                dp.setMsg("");
+                dp.setData(null);
+                return dp;
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("文件为空");
+        }
+        return dp;
+
+    }
+
+    //    多头像上传
+    @PostMapping(path = "/image/MissPersonPic")
+    public DownloadRepsoe imageMissPersonPic(MultipartFile file) {
+        dp = new DownloadRepsoe();
+
+        Integer userID = indexService.getPersonsCount();
 
         if (null != file) {
             String myFileName = file.getOriginalFilename();// 文件原名称
@@ -419,5 +463,6 @@ public class IndexController {
 
         return result;
     }
+
 
 }
