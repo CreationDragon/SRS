@@ -38,12 +38,12 @@ public class IndexRepository {
         if ("province".equals(sign)) {
             areaProvinceList = jdbcTemplate.query("select * from area_province", new BeanPropertyRowMapper<>(com.gtt.srs.model.AreaProvince.class));
         } else if (sign.equals("city")) {
-            areaCityList = jdbcTemplate.query("select * from qms.area_city WHERE province_id=" + count, new BeanPropertyRowMapper<>(com.gtt.srs.model.AreaCity.class));
-//            areaCityList = jdbcTemplate.query("select * from qms.area_city WHERE city_id=" + count, new BeanPropertyRowMapper<>(AreaCity.class));
+            areaCityList = jdbcTemplate.query("select * from srs.area_city WHERE province_id=" + count, new BeanPropertyRowMapper<>(com.gtt.srs.model.AreaCity.class));
+//            areaCityList = jdbcTemplate.query("select * from srs.area_city WHERE city_id=" + count, new BeanPropertyRowMapper<>(AreaCity.class));
         } else if (sign.equals("district")) {
 //            count = count - 1;
-            areaDistrictList = jdbcTemplate.query("select * from qms.area_district WHERE city_id=" + count, new BeanPropertyRowMapper<>(com.gtt.srs.model.AreaDistrict.class));
-//            areaDistrictList = jdbcTemplate.query("select * from qms.area_district WHERE district_id=" + count, new BeanPropertyRowMapper<>(AreaDistrict.class));
+            areaDistrictList = jdbcTemplate.query("select * from srs.area_district WHERE city_id=" + count, new BeanPropertyRowMapper<>(com.gtt.srs.model.AreaDistrict.class));
+//            areaDistrictList = jdbcTemplate.query("select * from srs.area_district WHERE district_id=" + count, new BeanPropertyRowMapper<>(AreaDistrict.class));
         }
         Area area = new Area();
         area.setProvinceList(areaProvinceList);
@@ -93,9 +93,9 @@ public class IndexRepository {
     }
 
     public ThreeArea getAreaById(String provinceID, String cityID, String districtID) {
-        AreaProvince areaProvince = jdbcTemplate.queryForObject("SELECT * FROM qms.area_province WHERE province_id= ? ", new Object[]{provinceID}, new BeanPropertyRowMapper<>(AreaProvince.class));
-        AreaCity areaCity = jdbcTemplate.queryForObject("SELECT * FROM qms.area_city WHERE city_id= ? ", new Object[]{cityID}, new BeanPropertyRowMapper<>(AreaCity.class));
-        AreaDistrict areaDistrict = jdbcTemplate.queryForObject("SELECT * FROM qms.area_district WHERE district_id= ? ", new Object[]{districtID}, new BeanPropertyRowMapper<>(AreaDistrict.class));
+        AreaProvince areaProvince = jdbcTemplate.queryForObject("SELECT * FROM srs.area_province WHERE province_id= ? ", new Object[]{provinceID}, new BeanPropertyRowMapper<>(AreaProvince.class));
+        AreaCity areaCity = jdbcTemplate.queryForObject("SELECT * FROM srs.area_city WHERE city_id= ? ", new Object[]{cityID}, new BeanPropertyRowMapper<>(AreaCity.class));
+        AreaDistrict areaDistrict = jdbcTemplate.queryForObject("SELECT * FROM srs.area_district WHERE district_id= ? ", new Object[]{districtID}, new BeanPropertyRowMapper<>(AreaDistrict.class));
 
         ThreeArea threeArea = new ThreeArea();
         threeArea.setAreaProvince(areaProvince);

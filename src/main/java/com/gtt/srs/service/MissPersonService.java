@@ -10,4 +10,6 @@ public interface MissPersonService {
     Missingpersons getMissPersonsById(Integer missPersonId);
 
     Integer getMissPersonsCount();
+
+    List<Missingpersons> getMissPersonApp();
 }

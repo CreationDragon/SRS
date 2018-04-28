@@ -55,13 +55,13 @@ public class ManagerRepository {
     }
 
     public String getProvinceById(Integer userProvinceId) {
-        String province = jdbcTemplate.queryForObject("SELECT  province_name FROM qms.area_province WHERE province_id= " + userProvinceId, String.class);
+        String province = jdbcTemplate.queryForObject("SELECT  province_name FROM srs.area_province WHERE province_id= " + userProvinceId, String.class);
 
         return province;
     }
 
     public String getDistrictById(Integer userDistrictId) {
-        String district = jdbcTemplate.queryForObject("SELECT  district_name FROM qms.area_district WHERE district_id= " + userDistrictId, String.class);
+        String district = jdbcTemplate.queryForObject("SELECT  district_name FROM srs.area_district WHERE district_id= " + userDistrictId, String.class);
 
         return district;
     }
@@ -83,9 +83,9 @@ public class ManagerRepository {
     }
 
     public ThreeArea getAreaById(String provinceID, String cityID, String districtID) {
-        AreaProvince areaProvince = jdbcTemplate.queryForObject("SELECT * FROM qms.area_province WHERE province_id= ? ", new Object[]{provinceID}, new BeanPropertyRowMapper<>(AreaProvince.class));
-        AreaCity areaCity = jdbcTemplate.queryForObject("SELECT * FROM qms.area_city WHERE city_id= ? ", new Object[]{cityID}, new BeanPropertyRowMapper<>(AreaCity.class));
-        AreaDistrict areaDistrict = jdbcTemplate.queryForObject("SELECT * FROM qms.area_district WHERE district_id= ? ", new Object[]{districtID}, new BeanPropertyRowMapper<>(AreaDistrict.class));
+        AreaProvince areaProvince = jdbcTemplate.queryForObject("SELECT * FROM srs.area_province WHERE province_id= ? ", new Object[]{provinceID}, new BeanPropertyRowMapper<>(AreaProvince.class));
+        AreaCity areaCity = jdbcTemplate.queryForObject("SELECT * FROM srs.area_city WHERE city_id= ? ", new Object[]{cityID}, new BeanPropertyRowMapper<>(AreaCity.class));
+        AreaDistrict areaDistrict = jdbcTemplate.queryForObject("SELECT * FROM srs.area_district WHERE district_id= ? ", new Object[]{districtID}, new BeanPropertyRowMapper<>(AreaDistrict.class));
 
         ThreeArea threeArea = new ThreeArea();
         threeArea.setAreaProvince(areaProvince);
@@ -122,15 +122,15 @@ public class ManagerRepository {
     }
 
     public Integer deleteQues(Integer quesid) {
-        Integer result = jdbcTemplate.update("UPDATE qms.question SET question_state=1 WHERE question_id=?", new Object[]{quesid});
+        Integer result = jdbcTemplate.update("UPDATE srs.question SET question_state=1 WHERE question_id=?", new Object[]{quesid});
         return result;
     }
 
 
     public String editQues(String title, String answerA, String answerB, String answerC, String answerD, Integer quesid) {
         String msg = null;
-        int value = jdbcTemplate.update("UPDATE qms.question SET qms.question.title=?, qms.question.answer_A=?, qms.question.answer_B=?," +
-                        " qms.question.answer_C=?, qms.question.answer_D=? WHERE qms.question.question_id=?",
+        int value = jdbcTemplate.update("UPDATE srs.question SET srs.question.title=?, srs.question.answer_A=?, srs.question.answer_B=?," +
+                        " srs.question.answer_C=?, srs.question.answer_D=? WHERE srs.question.question_id=?",
                 new Object[]{
                         title, answerA, answerB, answerC, answerD, quesid
                 });

@@ -34,4 +34,10 @@ public class MissPersonServiceImpl implements MissPersonService {
         Integer count = missPersonRepository.getMissPersonsCount();
         return count;
     }
+
+    @Override
+    public List<Missingpersons> getMissPersonApp() {
+        missingpersonsList = missPersonRepository.getMissPersonApp();
+        return missingpersonsList;
+    }
 }

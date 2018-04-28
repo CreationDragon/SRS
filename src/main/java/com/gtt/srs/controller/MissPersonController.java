@@ -47,4 +47,13 @@ public class MissPersonController {
         return result;
     }
 
+    @PostMapping(path = "/getMissPersonApp")
+    public JsonResult getMissPerson() {
+        result = new JsonResult();
+        missingpersonsList = missPersonService.getMissPersonApp();
+        result.setResult("success");
+        result.setData(missingpersonsList);
+        return result;
+    }
+
 }
