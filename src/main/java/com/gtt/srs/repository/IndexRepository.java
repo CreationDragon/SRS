@@ -199,4 +199,9 @@ public class IndexRepository {
         int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM missingpersons", Integer.class);
         return count;
     }
+
+    public Integer getRegistersId() {
+        Integer userId = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM srs.user", Integer.class);
+        return userId;
+    }
 }

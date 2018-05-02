@@ -69,7 +69,8 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">确认</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo"><a href="index.html">确认</a>
+            </button>
         </div>
     </div>
 
@@ -81,6 +82,7 @@
 <script>
     console.info(window.location.href)
     var id = window.location.href.split("=")[1];
+    console.info("传递过去的志愿者ID是:  " + id)
     var userID = null;
     //获取用户的基本信息
     $.ajax({
@@ -89,7 +91,6 @@
         url: "/getUserId",
         async: false,
         success: function (data) {
-            console.info("用户的ID:    " + data);
             userID = data;
 
             if (data !== "") {
@@ -121,9 +122,9 @@
                 });
             } else {
                 layer.msg("您未登录，无法查看")
-                setTimeout(function () {
-                    window.location.href = "index.html";
-                }, 2000)
+                // setTimeout(function () {
+                //     window.location.href = "index.html";
+                // }, 2000)
 
             }
 
@@ -134,8 +135,11 @@
         var form = layui.form;
 
     });
-    $(".layui-btn").click(function () {
-        window.location.href = "index.html"
+
+
+    $("#sure_info").click(function () {
+        window.history.back();
+        // window.location.href("index.html");
     })
 
 

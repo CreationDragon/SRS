@@ -23,6 +23,7 @@ public class IndexServiceImpl implements IndexService {
     private String msg;
     private User user;
     private Volunteer volunteer;
+    private Integer userId = null;
     private List<User> userList = new ArrayList<>();
     private List<Missingpersons> missingpersonsList = new ArrayList<>();
     private List<Volunteer> volunteerList = new ArrayList<>();
@@ -144,5 +145,11 @@ public class IndexServiceImpl implements IndexService {
     public int getPersonsCount() {
         int count = indexRepository.getPersonsCount();
         return count + 1;
+    }
+
+    @Override
+    public Integer getRegistersId() {
+        userId = indexRepository.getRegistersId();
+        return userId;
     }
 }

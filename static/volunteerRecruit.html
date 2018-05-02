@@ -15,7 +15,7 @@
     <link type="text/css" href="css/style.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/scroll.js"></script>
-   //志愿者招募滚动效果
+    <!--志愿者招募滚动效果-->
     <script type="text/javascript">
         $(document).ready(function () {
             $('.list_lh li:even').addClass('lieven');
@@ -32,7 +32,7 @@
 <div id="Content">
     <div id="leftContent">
         <h2>志愿者招募条件</h2>
-        <ol>  //有序
+        <ol> <!--有序-->
             <li>1、身体健康，年满20周岁。</li>
             <li>2、每周有固定的休闲时间。</li>
             <li>3、无任何犯罪记录，品德良好。</li>
@@ -44,7 +44,7 @@
 
     </div>
 
-    //志愿者招募框
+    <!--志愿者招募框-->
     <div class="box">
         <div class="bcon">
             <h1><b>志愿者招募实情</b></h1>
@@ -63,6 +63,7 @@
     <div id="clear"></div>
     <script src="js/jquery-3.3.1.js"></script>
     <script>
+        var id = null;
         $.ajax({
             url: "/getVolunteer",
             method: "post",
@@ -73,12 +74,14 @@
                 $.each(res, function (i) {
                     $(".list_lh>ul").append(
                         "<li>\n" +
-                        "                        <p><a href=\"volunteerDerail.html?id=" + res[i].volunteerId + "\"  target=\"_blank\">" + res[i].volunteerName + "</a><a\n" +
+                        "                        <p><a class='volunteer_open' href='volunteerDerail.html?volunteerId=" + res[i].volunteerId + "' id=" + res[i].volunteerId + "\>" + res[i].volunteerName + "</a><a\n" +
                         "                                target=\"_blank\" class=\"btn_lh\">NO." + res[i].volunteerId + "</a><em>注册</em></p>\n" +
                         "                        <p><span>" + res[i].volunteerRegisterDate + "</span>\n" +
                         "                        </p>\n" +
                         "                    </li>"
                     )
+
+
                 })
 
             },
@@ -87,8 +90,30 @@
             }
         })
 
-
+        // $(function () {
+        //     $(".volunteer_open").click(function () {
+        //         id = $(".volunteer_open").attr("id");
+        //         console.info("志愿者的ID:   " + id);
+        //         layer.open({
+        //             type: 2,
+        //             title: '志愿者信息浏览',
+        //             shadeClose: true,
+        //             closeBtn: 1,
+        //             shade: 0.8,
+        //             area: ['50%', '50%'],
+        //             btn: ['确认', '取消'],
+        //             content: 'volunteerDerail.html?volunteerId=' + id,//iframe的url
+        //             yes: function () {
+        //                 layer.closeAll()
+        //             },
+        //             no: function () {
+        //
+        //             },
+        //         });
+        //     })
+        // })
     </script>
+
 </div>
 
 </body>

@@ -28,6 +28,7 @@ public class IndexController {
     private String msg;
     private HttpSession session;
     private String root = null;
+    private Integer userId = null;
     private JsonResult result = new JsonResult();
     private DownloadRepsoe dp = new DownloadRepsoe();
     private Volunteer volunteer = new Volunteer();
@@ -42,9 +43,13 @@ public class IndexController {
 
         String userName = (String) request.getSession().getAttribute("userName");
         String userPsw = (String) request.getSession().getAttribute("userPsw");
+        Integer userId = (Integer) request.getSession().getAttribute("user_id");
 
         user.setUserName(userName);
         user.setUserPsw(userPsw);
+        if (null != userId) {
+            user.setUserId(userId);
+        }
 
 
         result.setResult("success");
@@ -102,6 +107,9 @@ public class IndexController {
 
         msg = indexService.registerNumber(user);
 
+
+        userId = indexService.getRegistersId();
+
         JsonResult result = new JsonResult();
         if (msg.equals("注册成功")) {
             result.setResult("success");
@@ -110,7 +118,7 @@ public class IndexController {
             //将数据存储在Session中
             session.setAttribute("userName", user.getUserName());
             session.setAttribute("userPsw", user.getUserPsw());
-            session.setAttribute("user_id", user.getUserId());
+            session.setAttribute("user_id", userId);
         } else {
             result.setResult("fail");
         }

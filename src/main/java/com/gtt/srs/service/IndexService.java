@@ -42,4 +42,5 @@ public interface IndexService {
 
     int getPersonsCount();
 
+    Integer getRegistersId();
 }
