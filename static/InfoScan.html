@@ -46,7 +46,7 @@
         laypage.render({
             elem: 'page'
             , count: count //数据总数，从服务端得到
-            , limit: 25
+            , limit: 20
             , jump: function (obj, first) {
                 //obj包含了当前分页的所有参数，比如：
                 // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
@@ -60,14 +60,19 @@
                     data: {"page": obj.curr, "limit": obj.limit},
                     success: function (data) {
                         var result = data.data;
+                        $("#tr1").empty();
+                        $("#tr2").empty();
+                        $("#tr3").empty();
+                        $("#tr4").empty();
+                        $("#tr5").empty();
                         $.each(result, function (i) {
 
 
-                            if (i < 5) {
+                            if (i < 4) {
                                 $("#tr1").append(
                                     "  <td>\n" +
                                     "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                    "                <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "                <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                                     "                <div class=\"misserInfo\">\n" +
                                     "                    <p>" + result[i].personsName + "</p>\n" +
                                     "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
@@ -79,11 +84,11 @@
                                     "            </div>\n" +
                                     "        </td>"
                                 )
-                            } else if (i < 10) {
+                            } else if (i < 8) {
                                 $("#tr2").append(
                                     "  <td>\n" +
                                     "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                    "                <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "                <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                                     "                <div class=\"misserInfo\">\n" +
                                     "                    <p>" + result[i].personsName + "</p>\n" +
                                     "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
@@ -95,11 +100,27 @@
                                     "            </div>\n" +
                                     "        </td>"
                                 )
-                            } else if (i < 15) {
+                            } else if (i < 12) {
                                 $("#tr3").append(
                                     "  <td>\n" +
                                     "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                    "                <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "                <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "                <div class=\"misserInfo\">\n" +
+                                    "                    <p>" + result[i].personsName + "</p>\n" +
+                                    "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                                    "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                                    "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                                    "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"clear\"></div>\n" +
+                                    "            </div>\n" +
+                                    "        </td>"
+                                )
+                            } else if (i < 16) {
+                                $("#tr4").append(
+                                    "  <td>\n" +
+                                    "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                                    "               <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                                     "                <div class=\"misserInfo\">\n" +
                                     "                    <p>" + result[i].personsName + "</p>\n" +
                                     "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
@@ -112,26 +133,10 @@
                                     "        </td>"
                                 )
                             } else if (i < 20) {
-                                $("#tr4").append(
-                                    "  <td>\n" +
-                                    "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                    "               <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
-                                    "                <div class=\"misserInfo\">\n" +
-                                    "                    <p>" + result[i].personsName + "</p>\n" +
-                                    "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
-                                    "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
-                                    "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
-                                    "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
-                                    "                </div>\n" +
-                                    "                <div class=\"clear\"></div>\n" +
-                                    "            </div>\n" +
-                                    "        </td>"
-                                )
-                            } else if (i < 25) {
                                 $("#tr5").append(
                                     "  <td>\n" +
                                     "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                    "               <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "               <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                                     "                <div class=\"misserInfo\">\n" +
                                     "                    <p>" + result[i].personsName + "</p>\n" +
                                     "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +

@@ -315,7 +315,7 @@ public class IndexController {
 
     }
 
-    //    多头像上传
+    //    失踪信息多头像上传
     @PostMapping(path = "/upload/MissPersonPic")
     public DownloadRepsoe uploadMissPersonPic(MultipartFile file, @RequestParam Integer userID) {
         dp = new DownloadRepsoe();
@@ -330,8 +330,8 @@ public class IndexController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics/" + userID;
-//            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/resources/ImgTest/";
+//            将文件存储在missImage文件夹中
+            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missImage";
             File fileDir = new File(pathname);
             if (!fileDir.exists()) { //如果不存在 则创建
                 fileDir.mkdirs();
@@ -363,11 +363,8 @@ public class IndexController {
     public DownloadRepsoe imageMissPersonPic(MultipartFile file) {
         dp = new DownloadRepsoe();
 
-        Integer userID = indexService.getPersonsCount();
-
         if (null != file) {
             String myFileName = file.getOriginalFilename();// 文件原名称
-            indexService.putPersonsPic(myFileName, userID);
             try {
                 root = String.valueOf(ResourceUtils.getURL("application.properties"));
                 System.out.println(root);
@@ -375,8 +372,7 @@ public class IndexController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missPersonsPics/" + userID;
-//            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/resources/ImgTest/";
+            String pathname = root.split("file:/")[1].split("application.properties")[0] + "/static/missImage";
             File fileDir = new File(pathname);
             if (!fileDir.exists()) { //如果不存在 则创建
                 fileDir.mkdirs();
@@ -471,6 +467,5 @@ public class IndexController {
 
         return result;
     }
-
 
 }

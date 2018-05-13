@@ -14,14 +14,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="js/jquery-3.3.1.js"></script>
     <script src="layer/layer.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/quesSearch.css">
+
 </head>
 <body>
 
 <div class="layui-form-item" id="contain">
-    <input type="text" name="message" autocomplete="off"
-           class="layui-input" id="keyword" placeholder="请输入关键字">
-    <div class="layui-btn" id="search">搜索</div>
+
+    <input type="search" name="message" autocomplete="off"
+           class="layui-input" id="keyword" placeholder="请输入关键字"/>
+    <button type="button" class="layui-btn" id="test1" style="padding-left: 10px">
+        <i class="layui-icon">&#xe660;</i>
+    </button>
+    <div class="layui-btn" id="search" style="padding-right: 10px">搜索</div>
     <div id="clear"></div>
 
     <div id="content">
@@ -53,7 +60,7 @@
                             $("#content").append(
                                 "  <td>\n" +
                                 "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
-                                "                <img class=" + result[i].personsId + " src=\"missPersonsPics/" + result[i].personsId + "/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                "                <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
                                 "                <div class=\"misserInfo\">\n" +
                                 "                    <p>" + result[i].personsName + "</p>\n" +
                                 "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
@@ -76,6 +83,7 @@
         })
     });
 
+
     $(function () {
         $("#nav_content").on("click", ".MissInfo", function () {
             var id = $(this).attr("id");
@@ -88,6 +96,29 @@
         var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 
     });
+
+    //头像上传
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            , url: '/image/MissPersonPic' //上传接口
+            , multiple: true
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("文件上传成功");
+            }
+            , done: function (res, index, upload) { //每个文件提交一次触发一次。详见“请求成功的回调”
+                console.info("res:  " + res)
+                console.info("index:   " + index)
+                console.info("upload:   " + upload)
+
+            }
+        })
+    });
+
+
 </script>
 
 </body>

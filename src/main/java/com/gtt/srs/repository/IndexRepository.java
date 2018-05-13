@@ -167,13 +167,12 @@ public class IndexRepository {
         if (picNameList.size() != 0) {
             for (String picName : picNameList
                     ) {
-                if (picName == myFileName) {
+                if (picName.equals(myFileName)) {
                     System.out.println("已经有这张图片了");
                 } else {
-                    break;
+                    jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
                 }
             }
-            jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
         } else {
             jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
         }
