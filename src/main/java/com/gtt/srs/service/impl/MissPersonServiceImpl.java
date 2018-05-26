@@ -40,4 +40,10 @@ public class MissPersonServiceImpl implements MissPersonService {
         missingpersonsList = missPersonRepository.getMissPersonApp();
         return missingpersonsList;
     }
+
+    @Override
+    public List<Missingpersons> getMisspersonByUserId(Integer userId) {
+        missingpersonsList = missPersonRepository.getMisspersonByUserId(userId);
+        return missingpersonsList;
+    }
 }

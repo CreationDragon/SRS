@@ -99,4 +99,36 @@ public class MissPersonRepository {
         });
         return missingpersonsList;
     }
+
+    public List<Missingpersons> getMisspersonByUserId(Integer userId) {
+        missingpersonsList = jdbcTemplate.query("SELECT * FROM missingpersons WHERE user_id = ?", new Object[]{userId}, new RowMapper<Missingpersons>() {
+            @Override
+            public Missingpersons mapRow(ResultSet resultSet, int i) throws SQLException {
+                missingpersons = new Missingpersons();
+                missingpersons.setPersonsId(resultSet.getInt("persons_id"));
+                missingpersons.setMissState(resultSet.getInt("miss_state"));
+                missingpersons.setPersonsAddress(resultSet.getString("persons_address"));
+                missingpersons.setPersonsAge(resultSet.getInt("persons_age"));
+                missingpersons.setPersonsBodyheight(resultSet.getInt("persons_bodyheight"));
+                missingpersons.setPersonsContact(resultSet.getString("persons_contact"));
+                missingpersons.setPersonsDateDiscovered(resultSet.getString("persons_DateDiscovered"));
+                missingpersons.setPersonsDna(resultSet.getInt("persons_DNA"));
+                missingpersons.setPersonsDiscoverySites(resultSet.getString("persons_DiscoverySites"));
+                missingpersons.setPersonsName(resultSet.getString("persons_name"));
+                missingpersons.setPersonsNote(resultSet.getString("persons_note"));
+                missingpersons.setPersonsReleasedate(resultSet.getString("persons_RELEASEDATE"));
+                missingpersons.setPersonsRescueunit(resultSet.getString("persons_rescueunit"));
+                missingpersons.setPersonsGender(resultSet.getString("persons_gender"));
+                missingpersons.setPersonsFeature(resultSet.getString("persons_feature"));
+                List<String> picName = jdbcTemplate.queryForList("SELECT pic_name FROM personspic WHERE persons_id=" + resultSet.getInt("persons_id"), String.class);
+                if (picName.size() != 0) {
+                    missingpersons.setPsersonsPic(picName.get(0));
+                } else {
+                    missingpersons.setPsersonsPic(null);
+                }
+                return missingpersons;
+            }
+        });
+        return missingpersonsList;
+    }
 }

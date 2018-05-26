@@ -56,4 +56,13 @@ public class MissPersonController {
         return result;
     }
 
+    @PostMapping(path = "/getMissPersonByUserid")
+    public JsonResult getMisspersonByUserId(@RequestParam Integer userId) {
+        result = new JsonResult();
+        missingpersonsList = missPersonService.getMisspersonByUserId(userId);
+        result.setData(missingpersonsList);
+
+        return result;
+
+    }
 }

@@ -30,6 +30,8 @@
         <mapping resource="com/gtt/srs/entity/Personspic.hbm.xml"/>
         <mapping class="com.gtt.srs.entity.News"/>
         <mapping resource="com/gtt/srs/entity/News.hbm.xml"/>
+        <mapping resource="com/gtt/srs/entity/RecordHistory.hbm.xml"/>
+        <mapping class="com.gtt.srs.entity.RecordHistory"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
