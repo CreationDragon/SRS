@@ -422,6 +422,11 @@ public class IndexController {
         result = new JsonResult();
         Volunteer volunteer = JSON.parseObject(volunteerInfo, Volunteer.class);
         int value = indexService.volunteerRegister(volunteer);
+        if (value != 0) {
+            result.setResult("success");
+        } else {
+            result.setResult("fail");
+        }
         return result;
     }
 
