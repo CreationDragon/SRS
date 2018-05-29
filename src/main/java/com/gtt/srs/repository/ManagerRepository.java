@@ -7,6 +7,7 @@ import com.gtt.srs.entity.AreaCity;
 import com.gtt.srs.entity.AreaDistrict;
 import com.gtt.srs.entity.AreaProvince;
 import com.gtt.srs.entity.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -101,6 +102,14 @@ public class ManagerRepository {
         Integer email = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM USER WHERE user_email = '" + user.getUserEmail() + "'", Integer.class);
         Integer phone = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM USER WHERE user_phone = '" + user.getUserPhone() + "'", Integer.class);
 
+        int num = 0;
+
+        if (StringUtils.isNotEmpty(user.getUserRuserRole())) {
+            num = Integer.parseInt(user.getUserRuserRole());
+        } else {
+            num = 0;
+        }
+
 //        if (name != 0) {
 //            msg = "该昵称已被使用";
 //        } else if (email != 0) {
@@ -108,13 +117,12 @@ public class ManagerRepository {
 //        } else if (phone != 0) {
 //            msg = "该电话已被使用";
 //        } else {
-        int value = jdbcTemplate.update("UPDATE USER SET user_name=?, user_psw=?, user_gener=?, user_phone=?, user_email=?,user_address_detail=?,user_province=?, user_city=?, user_district=? WHERE user_id=?",
-                new Object[]{
-                        user.getUserName(), user.getUserPsw(), user.getUserGener(),
-                        user.getUserPhone(), user.getUserEmail(), user.getUserAddressDetail(),
+        int value = jdbcTemplate.update("UPDATE srs.user SET user_authority=?, user_name=?, user_psw=?, user_gener=?, user_phone=?, user_email=?,user_address_detail=?,user_province=?, user_city=?, user_district=? WHERE user_id=?",
+                num,
+                user.getUserName(), user.getUserPsw(), user.getUserGener(),
+                user.getUserPhone(), user.getUserEmail(), user.getUserAddressDetail(),
 //                            user.getProvince(), user.getCity(), user.getDistrict()
-                        user.getProvince(), user.getCity(), user.getDistrict(), userid
-                });
+                user.getProvince(), user.getCity(), user.getDistrict(), userid);
         System.out.println("插入数据后返回的数是:     " + value);
         msg = "修改成功";
 //        }

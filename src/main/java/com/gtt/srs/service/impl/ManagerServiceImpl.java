@@ -29,6 +29,9 @@ public class ManagerServiceImpl implements ManagerService {
 
         for (User u : users
                 ) {
+
+            String role = judgeAuthority(u.getUserAuthority());
+
             String city = managerRepository.getCityById(u.getUserCity());
             String province = managerRepository.getProvinceById(u.getUserProvince());
             String district = managerRepository.getDistrictById(u.getUserDistrict());
@@ -43,11 +46,27 @@ public class ManagerServiceImpl implements ManagerService {
             user.setUserEmail(u.getUserEmail());
             user.setUserPhone(u.getUserPhone());
             user.setUserGener(u.getUserGener());
+            user.setUserRuserRole(role);
             user.setOption("<div><i class=\"layui-icon\" style=\"font-size: 30px;color: #009688\" id=\"edit\">&#xe642;</i></i><i class=\"layui-icon\"style=\"font-size: 30px;color: #009688\" id=\"del\">&#xe640;</i></div>");
             userList.add(user);
         }
 
         return userList;
+    }
+
+    //    判断角色，权限
+    private String judgeAuthority(Integer userAuthority) {
+        String role = null;
+        switch (userAuthority) {
+            case 0:
+                role = "用户";
+                break;
+
+            case 1:
+                role = "管理员";
+                break;
+        }
+        return role;
     }
 
     @Override

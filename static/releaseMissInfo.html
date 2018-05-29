@@ -196,7 +196,7 @@
                                         // window.location.href = "index.html";
                                     } else {
                                         layer.msg("发布成功")
-                                        // window.location.href = "administrator.html";
+                                        //   window.location.href = "administrator.html";
                                     }
                                 }
                             },
@@ -226,7 +226,8 @@
             multiple: true, //允许多文件上传
             auto: false, //选完文件后不要自动上传
             bindAction: '#submit', //指定一个按钮触发上传
-            url: '/image/MissPersonPic', //上传接口
+            url: '/image/MissPersonPic', //发布信息图片上传接口
+            data: {"symbole": "releaseInfo"},
             choose: function (obj) {
                 var files = obj.pushFile(); //将每次选择的文件追加到文件队列
 

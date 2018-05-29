@@ -8,6 +8,7 @@ import com.gtt.srs.model.ThreeArea;
 import com.gtt.srs.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IndexService {
     ThreeArea getAreaById(String provinceID, String cityID, String districtID);
@@ -34,7 +35,7 @@ public interface IndexService {
 
     Volunteer getVolunteerInfo(Integer volunteerId);
 
-    void putPersonsPic(String myFileName, Integer useriD);
+    void putPersonsPic(String myFileName, Integer useriD, String hashCode);
 
     List<String> getPersonPics(Integer id);
 
@@ -43,4 +44,6 @@ public interface IndexService {
     int getPersonsCount();
 
     Integer getRegistersId();
+
+    Map<Integer,String> getAllHashCode();
 }

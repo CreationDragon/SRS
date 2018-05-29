@@ -25,14 +25,7 @@ public class User {
     private String district;
     private String option;
     private Integer count;
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
-    }
+    private String userRuserRole;
 
     public Integer getUserId() {
         return userId;
@@ -72,6 +65,30 @@ public class User {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public Integer getUserProvince() {
+        return userProvince;
+    }
+
+    public void setUserProvince(Integer userProvince) {
+        this.userProvince = userProvince;
+    }
+
+    public Integer getUserCity() {
+        return userCity;
+    }
+
+    public void setUserCity(Integer userCity) {
+        this.userCity = userCity;
+    }
+
+    public Integer getUserDistrict() {
+        return userDistrict;
+    }
+
+    public void setUserDistrict(Integer userDistrict) {
+        this.userDistrict = userDistrict;
     }
 
     public String getUserGener() {
@@ -114,30 +131,6 @@ public class User {
         this.userAuthority = userAuthority;
     }
 
-    public Integer getUserProvince() {
-        return userProvince;
-    }
-
-    public void setUserProvince(Integer userProvince) {
-        this.userProvince = userProvince;
-    }
-
-    public Integer getUserCity() {
-        return userCity;
-    }
-
-    public void setUserCity(Integer userCity) {
-        this.userCity = userCity;
-    }
-
-    public Integer getUserDistrict() {
-        return userDistrict;
-    }
-
-    public void setUserDistrict(Integer userDistrict) {
-        this.userDistrict = userDistrict;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -162,6 +155,14 @@ public class User {
         this.district = district;
     }
 
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
     public Integer getCount() {
         return count;
     }
@@ -170,10 +171,19 @@ public class User {
         this.count = count;
     }
 
+    public String getUserRuserRole() {
+        return userRuserRole;
+    }
+
+    public void setUserRuserRole(String userRuserRole) {
+        this.userRuserRole = userRuserRole;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
                 ", userPsw='" + userPsw + '\'' +
                 ", surepassword='" + surepassword + '\'' +
                 ", file='" + file + '\'' +
@@ -188,6 +198,9 @@ public class User {
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", district='" + district + '\'' +
+                ", option='" + option + '\'' +
+                ", count=" + count +
+                ", userRuserRole='" + userRuserRole + '\'' +
                 '}';
     }
 }

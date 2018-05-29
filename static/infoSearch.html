@@ -100,16 +100,61 @@
     //头像上传
     layui.use('upload', function () {
         var upload = layui.upload;
+        var keyword = null;
 
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1' //绑定元素
             , url: '/image/MissPersonPic' //上传接口
             , multiple: true
+            , data: {"symbole": "search"}
+            , success: function (data) {
+                keyword = data.msg;
+            }
             , allDone: function (obj) { //当文件全部被提交后，才触发
-                layer.msg("文件上传成功");
+                console.info("allDone:  " + keyword)
+                // layer.msg("文件上传成功");
+                $("#content").empty()
+                if (null != keyword) {
+                    $.ajax({
+                        type: "post",
+                        method: "post",
+                        url: "/infoSearch",
+                        data: {"keyWord": keyword},
+                        async: false,
+                        success: function (data) {
+                            var result = data.data;
+
+                            $.each(result, function (i) {
+                                $("#content").append(
+                                    "  <td>\n" +
+                                    "            <div class='MissInfo' style=\"margin: 5px;width: 300px\" id=" + result[i].personsId + ">\n" +
+                                    "                <img class=" + result[i].personsId + " src=\"missImage/" + result[i].psersonsPic + "\" alt=\"\" style=\"width: 100px;height: 100px\">\n" +
+                                    "                <div class=\"misserInfo\">\n" +
+                                    "                    <p>" + result[i].personsName + "</p>\n" +
+                                    "                    <p>" + result[i].personsGender + "|" + result[i].personsAge + "岁|" + result[i].personsBodyheight + "厘米</p>\n" +
+                                    "                    <p>区域:" + result[i].personsAddress + "</p>\n" +
+                                    "                    <p>救助单位:" + result[i].personsRescueunit + "</p>\n" +
+                                    "                    <p>发布时间:" + result[i].personsReleasedate + "</p>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"clear\"></div>\n" +
+                                    "            </div>\n" +
+                                    "        </td>"
+                                );
+                                if (result[i].psersonsPic == null) {
+                                    $("." + result[i].personsId).attr("src", "resources/imges/1.png");
+                                }
+                                $("#content").append("<div><hr class='layui-bg-blue' style='width: 600px'></div>");
+                            })
+                        }
+                    });
+                } else {
+                    $("#content").append("<div class='title'>对不起，本平台没有您要找的人</div>");
+                }
             }
             , done: function (res, index, upload) { //每个文件提交一次触发一次。详见“请求成功的回调”
+                keyword = res.msg;
+                console.info("keyWord:  " + keyword)
                 console.info("res:  " + res)
                 console.info("index:   " + index)
                 console.info("upload:   " + upload)

@@ -80,17 +80,29 @@
         </div>
     </div>
 
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">详细地址</label>
-        <div class="layui-input-block">
-            <textarea name="userAddressDetail" placeholder="请输入详细地址" class="layui-textarea"
-                      id="address_detail"></textarea>
-        </div>
-    </div>
 
     <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" type="button" lay-submit="" lay-filter="demo1">确认</button>
+        <label class="layui-form-label">权限</label>
+        <div class="layui-input-inline">
+            <select name="userRuserRole" id="userRuserRole" lay-filter="userRuserRole">
+                <option value="" class="role">请选择角色</option>
+                <option value="1" class="admin">管理员</option>
+                <option value="0" class="user">用户</option>
+            </select>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">详细地址</label>
+            <div class="layui-input-block">
+            <textarea name="userAddressDetail" placeholder="请输入详细地址" class="layui-textarea"
+                      id="address_detail"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" type="button" lay-submit="" lay-filter="demo1">确认</button>
+            </div>
         </div>
     </div>
 </form>
@@ -141,11 +153,18 @@
             $("#address_detail").val(result.userAddressDetail);
             // $("#province").append("<option value='" + provinceId + "'>" + province + "</option>").val(province);
             $("#city").append("<option selected='selected' value='" + cityId + "'>" + city + "</option>");
+
             $("#district").append("<option selected='selected' value='" + districtId + "'>" + district + "</option>");
             if (data.data.userGener == "男") {
                 $("input[value='男']").attr('checked', 'true');
             } else {
                 $("input[value='女']").attr('checked', 'true');
+            }
+
+            if (result.userAuthority === 1) {
+                $("option[value='1']").attr('selected', 'selected');
+            } else {
+                $("option[value='0']").attr('selected', 'selected');
             }
 
 

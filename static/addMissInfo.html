@@ -44,6 +44,22 @@
             </div>
             <div class="layui-form-mid layui-word-aux">厘米</div>
         </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">上传图片</label>
+            <div class='layui-container' style='margin-top:15px'>
+                <button type="button" class="layui-btn" id="test1">
+                    <i class="layui-icon"></i>选择图片
+                </button>
+                <div class='layui-input-block' id='div_prev' title=''></div>
+            </div>
+        </div>
+
+        <div id='prevModal'>
+            <img id='img_prev'/>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">特征</label>
             <div class="layui-input-inline">
@@ -100,6 +116,9 @@
 
 </div>
 
+
+</div>
+
 <script src="js/jquery-3.3.1.js"></script>
 <script src="layer/layer.js"></script>
 <script src="layui/layui.js" charset="utf-8"></script>
@@ -144,6 +163,7 @@
 
                     //监听提交
                     form.on('submit(formDemo)', function (data) {
+                        // layer.msg(JSON.stringify(data.field));
                         $.ajax({
                             url: "/releaseMissInfo",
                             method: "post",
@@ -151,8 +171,15 @@
                             datatype: "json",
                             data: {missPersonsInfo: JSON.stringify(data.field), "userID": userID},
                             success: function (data) {
+                                console.info("这里是发布信息成功位置")
                                 if (data.data != 0) {
-                                    layer.msg("添加成功");
+                                    if (sign == "releaseMissInfo") {
+                                        layer.msg("发布成功")
+                                        // window.location.href = "index.html";
+                                    } else {
+                                        layer.msg("发布成功")
+                                        //   window.location.href = "administrator.html";
+                                    }
                                 }
                             },
                             error: function (data) {
@@ -170,6 +197,49 @@
             }
 
         }
+    });
+
+
+    layui.use(['upload', 'layer'], function () {
+        var upload = layui.upload, layer = layui.layer, $ = layui.jquery;
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            accept: 'images', //允许上传的文件类型
+            multiple: true, //允许多文件上传
+            auto: false, //选完文件后不要自动上传
+            bindAction: '#submit', //指定一个按钮触发上传
+            url: '/image/MissPersonPic', //发布信息图片上传接口
+            data: {"symbole": "releaseInfo"},
+            choose: function (obj) {
+                var files = obj.pushFile(); //将每次选择的文件追加到文件队列
+
+                //图像预览，如果是多文件，会逐个添加。(不支持ie8/9)
+                obj.preview(function (index, file, result) {
+                    var imgobj = new Image(); //创建新img对象
+                    imgobj.src = result; //指定数据源
+                    imgobj.className = 'thumb';
+                    imgobj.onclick = function (result) {
+                        //单击预览
+                        img_prev.src = this.src;
+                        var w = $(window).width() - 42, h = $(window).height() - 42;
+                        layer.open({
+                            title: '预览',
+                            type: 1,
+                            area: [w, h], //宽高
+                            content: $('#prevModal')
+                        });
+                    };
+                    document.getElementById("div_prev").appendChild(imgobj); //添加到预览区域
+                });
+            },
+            done: function (res) {
+                //上传完毕回调
+                console.info("这里是图片上出的位置")
+            },
+            error: function () {
+                //请求异常回调
+            }
+        });
     });
 
 </script>

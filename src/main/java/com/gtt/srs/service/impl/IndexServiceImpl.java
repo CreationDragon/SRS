@@ -2,6 +2,7 @@ package com.gtt.srs.service.impl;
 
 import com.gtt.srs.entity.Message;
 import com.gtt.srs.entity.Missingpersons;
+import com.gtt.srs.entity.Personspic;
 import com.gtt.srs.entity.Volunteer;
 import com.gtt.srs.model.Area;
 import com.gtt.srs.model.ThreeArea;
@@ -12,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class IndexServiceImpl implements IndexService {
@@ -126,8 +125,8 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public void putPersonsPic(String myFileName, Integer useriD) {
-        indexRepository.putPersonsPic(myFileName, useriD);
+    public void putPersonsPic(String myFileName, Integer useriD, String hashCode) {
+        indexRepository.putPersonsPic(myFileName, useriD, hashCode);
     }
 
     @Override
@@ -144,12 +143,23 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public int getPersonsCount() {
         int count = indexRepository.getPersonsCount();
-        return count + 1;
+        return count;
     }
 
     @Override
     public Integer getRegistersId() {
         userId = indexRepository.getRegistersId();
         return userId;
+    }
+
+    @Override
+    public Map<Integer, String> getAllHashCode() {
+        Map<Integer, String> maps = new HashMap<>();
+        List<Personspic> pics = indexRepository.getAllHashCode();
+        for (Personspic p : pics
+                ) {
+            maps.put(p.getPersonsId(), p.getPicHashcode());
+        }
+        return maps;
     }
 }

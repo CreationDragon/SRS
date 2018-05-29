@@ -4,12 +4,14 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Personspic {
     private int picId;
     private Integer personsId;
     private String picName;
+    private String picHashcode;
 
     @Id
     @Column(name = "pic_id", nullable = false)
@@ -41,25 +43,30 @@ public class Personspic {
         this.picName = picName;
     }
 
+    @Basic
+    @Column(name = "pic_hashcode", nullable = true, length = 255)
+    public String getPicHashcode() {
+        return picHashcode;
+    }
+
+    public void setPicHashcode(String picHashcode) {
+        this.picHashcode = picHashcode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Personspic that = (Personspic) o;
-
-        if (picId != that.picId) return false;
-        if (personsId != null ? !personsId.equals(that.personsId) : that.personsId != null) return false;
-        if (picName != null ? !picName.equals(that.picName) : that.picName != null) return false;
-
-        return true;
+        return picId == that.picId &&
+                Objects.equals(personsId, that.personsId) &&
+                Objects.equals(picName, that.picName) &&
+                Objects.equals(picHashcode, that.picHashcode);
     }
 
     @Override
     public int hashCode() {
-        int result = picId;
-        result = 31 * result + (personsId != null ? personsId.hashCode() : 0);
-        result = 31 * result + (picName != null ? picName.hashCode() : 0);
-        return result;
+
+        return Objects.hash(picId, personsId, picName, picHashcode);
     }
 }

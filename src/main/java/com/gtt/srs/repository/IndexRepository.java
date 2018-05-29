@@ -162,7 +162,7 @@ public class IndexRepository {
         return volunteer;
     }
 
-    public void putPersonsPic(String myFileName, Integer userid) {
+    public void putPersonsPic(String myFileName, Integer userid, String hashCode) {
         List<String> picNameList = jdbcTemplate.queryForList("SELECT pic_name FROM `personspic` WHERE persons_id=" + userid, String.class);
         if (picNameList.size() != 0) {
             for (String picName : picNameList
@@ -170,11 +170,11 @@ public class IndexRepository {
                 if (picName.equals(myFileName)) {
                     System.out.println("已经有这张图片了");
                 } else {
-                    jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
+                    jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name,pic_hashcode)  VALUE (?,?,?)", new Object[]{userid, myFileName, hashCode});
                 }
             }
         } else {
-            jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name)  VALUE (?,?)", new Object[]{userid, myFileName});
+            jdbcTemplate.update("INSERT INTO personspic(persons_id, pic_name,pic_hashcode)  VALUE (?,?,?)", new Object[]{userid, myFileName, hashCode});
         }
     }
 
@@ -202,5 +202,11 @@ public class IndexRepository {
     public Integer getRegistersId() {
         Integer userId = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM srs.user", Integer.class);
         return userId;
+    }
+
+    public List<Personspic> getAllHashCode() {
+        List<Personspic> personspicList = new ArrayList<>();
+        personspicList = jdbcTemplate.query("SELECT * FROM personspic", new BeanPropertyRowMapper<>(Personspic.class));
+        return personspicList;
     }
 }
