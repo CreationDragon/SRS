@@ -37,6 +37,7 @@ public class AppServiceImpl implements AppService {
     public List<Missingpersons> getRecordHistoryByUserId(Integer userId) {
         missingpersonsList = new ArrayList<>();
 
+
         List<Integer> missPersonsId = appRepository.queryMissPersionId(userId);
 
         for (Integer i : missPersonsId
